@@ -1,0 +1,82 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Courses</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Course</a></li>
+                                <li class="active">List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn btn-primary " th:href="@{/admin/course/add}">New Course</a>
+
+            <br/>
+            <br/>
+
+
+            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+                <br/>
+                <span th:utext="${successMessage}" class="text-success"></span>
+                <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Code</th>
+                    <th>Degree Name</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.courseCode}"></td>
+                    <td th:text="${course.degree?.name}"></td>
+                    <td><a th:href="@{'/admin/course/update/' + ${course.id}}" class="btn btn-warning">Update</a></h2>
+                    </td>
+                    <td><a th:href="@{'/admin/course/delete/' + ${course.id}}"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+<script th:inline="none">
+    $(document).ready(function () {
+        $('#roleListTable').DataTable();
+    });
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "roleListTable": [[3, "desc"]]
+        });
+    });
+</script>
+
+        </div>
+    </div>
+</div>
+</div>
+            <div th:include="fragments/footer"></div>

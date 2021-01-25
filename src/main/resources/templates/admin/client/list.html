@@ -1,0 +1,94 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h4>Clients</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Clients</a></li>
+                                <li class="active">List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn btn-primary " th:href="@{/clients/add}">New Client</a>
+
+            <br/>
+            <br/>
+
+
+            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+                <br/>
+<!--                <span th:utext="${successMessage}" class="text-success"></span>-->
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>I.D Number</th>
+                    <th>Gender</th>
+                    <th>PhoneNumber</th>
+                    <th>Email </th>
+                    <th>D.O.B</th>
+
+
+                    <th scope="col">View</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.title}"></td>
+                    <td th:text="${client.firstName}"></td>
+                    <td th:text="${client.lastName}"></td>
+
+                    <td th:text="${client.idNumber}"></td>
+                    <td th:text="${client.gender?.name}"></td>
+                    <td th:text="${client.phoneNumber}"></td>
+                    <td th:text="${client.email}"></td>
+                    <td th:text="${client.dateOfBirth}"></td>
+                    <td><a th:href="@{'/admin/student/view/' + ${client.id}}" class="btn btn-success">View</a></h2>
+                    </td>
+
+
+
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <script th:inline="none">
+                $(document).ready(function () {
+                    $('#roleListTable').DataTable();
+                });
+                $(document).ready(function () {
+                    $('#example').DataTable({
+                        "roleListTable": [[3, "desc"]]
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>
