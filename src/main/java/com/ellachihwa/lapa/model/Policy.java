@@ -10,6 +10,10 @@ import javax.persistence.Id;
 @Entity
 public class Policy {
     @Id
+    private Long id;
+    private String name;
+    private String description;
+
     private Long policyNumber;
     private Long premium;
     @Enumerated
@@ -17,6 +21,8 @@ public class Policy {
 
     @Enumerated
     private Status status;
+    private Long amount;
+    private Long duration;
 
     public Long getPolicyNumber() {
         return policyNumber;
@@ -48,5 +54,45 @@ public class Policy {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public Long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Long duration) {
+        this.duration = duration;
     }
 }

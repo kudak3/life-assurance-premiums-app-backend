@@ -21,7 +21,7 @@ public class PolicyController {
     @GetMapping("list")
     public String getAllPolicies(Model model){
         model.addAttribute("policies",policyService.getPolicies());
-        return "/admin/policy";
+        return "/admin/policy/list";
     }
 
     @PostMapping("save")
@@ -45,8 +45,9 @@ public class PolicyController {
 
         Policy policy = new Policy();
         model.addAttribute("policy", policy);
-        model.addAttribute("status", Status.values());
-        model.addAttribute("plan", Plan.values());
+        model.addAttribute("statuses", Status.values());
+        model.addAttribute("plans", Plan.values());
         return "admin/policy/add";
     }
+
 }
