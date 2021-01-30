@@ -15148,7 +15148,7 @@ module.exports = function(Chart) {
                 pointPosition = this.getPointPosition(i, largestPossibleRadius);
                 textWidth = this.ctx.measureText(this.pointLabels[i] ? this.pointLabels[i] : '').width + 5;
 
-                // Add quarter circle to make degree 0 mean top of circle
+                // Add quarter circle to make claim 0 mean top of circle
                 var angleRadians = this.getIndexAngle(i) + (Math.PI / 2);
                 var angle = (angleRadians * 360 / (2 * Math.PI)) % 360;
 
@@ -15358,7 +15358,7 @@ module.exports = function(Chart) {
 
                         var pointLabels = me.pointLabels;
 
-                        // Add quarter circle to make degree 0 mean top of circle
+                        // Add quarter circle to make claim 0 mean top of circle
                         var angleRadians = this.getIndexAngle(i) + (Math.PI / 2);
                         var angle = (angleRadians * 360 / (2 * Math.PI)) % 360;
 

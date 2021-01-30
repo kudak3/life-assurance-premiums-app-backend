@@ -12,7 +12,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>Policies</h1>
+                            <h1>Claims</h1>
                         </div>
                     </div>
                 </div>
@@ -20,15 +20,15 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Insurance Policy</a></li>
-                                <li class="active">List</li>
+                                <li><a href="#">Insurance Claims</a></li>
+                                <li class="active ml-4">List</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <a class="btn btn-primary " th:href="@{/policies/add}">Add Policy</a>
+            <a class="btn btn-primary " th:href="@{/claims/add}">Add Claim</a>
 
             <br/>
             <br/>
@@ -36,33 +36,31 @@
 
             <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
                 <br/>
-                <span th:utext="${successMessage}" class="text-success"></span>
+<!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead>
                 <tr>
-                    <th>Policy Name</th>
+                    <th>Client ID</th>
                     <th> Policy Number</th>
                     <th>Description</th>
-                    <th>Plan Type</th>
-                    <th>Premium</th>
-                    <th>Amount</th>
-                    <th>Duration</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
 
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="policy : ${policies}">
-                    <td th:text="${policy.name}"></td>
-                    <td th:text="${policy.policyNumber}"></td>
-                    <td th:text="${policy.description}"></td>
-                    <td th:text="${policy.plan}"></td>
-                    <td th:text="${policy.premium}"></td>
-                    <td th:text="${policy.amount}"></td>
-                    <td th:text="${policy.duration}"></td>
+                <tr th:each="claim : ${claims}">
+                    <td th:text="${claim.clientId}"></td>
+                    <td th:text="${claim.policyNumber}"></td>
+                    <td th:text="${claim.description}"></td>
+                    <td th:text="${claim.date}"></td>
+                    <td th:text="${claim.claimStatus}"></td>
 
-                    <td><a th:href="@{'/course/update/' + ${policy.id}}" class="btn btn-warning">Update</a></h2>
+                    <td><a th:href="@{'/claims/update/' + ${claim.id}}" class="btn btn-warning">Update</a></h2>
                     </td>
-                    <td><a th:href="@{'/policy/delete/' + ${policy.id}}"
+                    <td><a th:href="@{'/claims/delete/' + ${claim.id}}"
                            onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
                     </td>
 
@@ -71,20 +69,20 @@
             </table>
 
 
-<script th:inline="none">
-    $(document).ready(function () {
-        $('#roleListTable').DataTable();
-    });
-    $(document).ready(function () {
-        $('#example').DataTable({
-            "roleListTable": [[3, "desc"]]
-        });
-    });
-</script>
+            <script th:inline="none">
+                $(document).ready(function () {
+                    $('#roleListTable').DataTable();
+                });
+                $(document).ready(function () {
+                    $('#example').DataTable({
+                        "roleListTable": [[3, "desc"]]
+                    });
+                });
+            </script>
 
         </div>
     </div>
 </div>
 </div>
-            <div th:include="fragments/footer"></div>
+<div th:include="fragments/footer"></div>
 </html>

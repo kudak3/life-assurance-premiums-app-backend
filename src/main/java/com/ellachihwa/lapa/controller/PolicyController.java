@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("policy/")
+@RequestMapping("policies/")
 public class PolicyController {
     @Autowired
     PolicyService policyService;

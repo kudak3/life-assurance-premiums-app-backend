@@ -13,6 +13,7 @@ public class InsuranceClaim {
     private Long id;
     private Date date;
     private String clientId;
+    private String policyNumber;
     private String description;
     @Enumerated
     private ClaimStatus claimStatus;
@@ -55,5 +56,13 @@ public class InsuranceClaim {
 
     public void setClaimStatus(ClaimStatus claimStatus) {
         this.claimStatus = claimStatus;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 }

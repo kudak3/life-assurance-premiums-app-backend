@@ -13,4 +13,9 @@ public class IndexController {
     public String viewHomePage(Model model) {
         return "index";
     }
+
+    @GetMapping("/config")
+    public String configurationPage(){
+        return "admin/configurations";
+    }
 }
