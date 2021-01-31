@@ -1,6 +1,6 @@
 
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <th:block th:include="fragments/header"></th:block>
 
@@ -20,7 +20,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Clients</a></li>
+                                <li><a href="#">Clients </a></li>
                                 <li class="active">List</li>
                             </ol>
                         </div>
@@ -40,8 +40,8 @@
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Full Name</th>
+
                     <th>I.D Number</th>
                     <th>Gender</th>
                     <th>PhoneNumber</th>
@@ -49,25 +49,24 @@
                     <th>D.O.B</th>
 
 
-                    <th scope="col">View</th>
+                    <th>Action</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="client : ${clients}">
+
                     <td th:text="${client.title}"></td>
-                    <td th:text="${client.firstName}"></td>
-                    <td th:text="${client.lastName}"></td>
+                    <td th:text="${client.firstName + ' ' + client.lastName}"></td>
 
                     <td th:text="${client.idNumber}"></td>
                     <td th:text="${client.gender?.name}"></td>
                     <td th:text="${client.phoneNumber}"></td>
                     <td th:text="${client.email}"></td>
                     <td th:text="${client.dateOfBirth}"></td>
-                    <td><a th:href="@{'/admin/student/view/' + ${client.id}}" class="btn btn-success">View</a></h2>
+                    <td><a th:href="@{'/clients/view/' + ${client.id}}" class="btn btn-success">View</a>
                     </td>
-
 
 
 
@@ -92,3 +91,4 @@
 </div>
 </div>
 <div th:include="fragments/footer"></div>
+</html>

@@ -11,7 +11,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h4>View Student</h4>
+                            <h4>View Client</h4>
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Student</a></li>
+                                <li><a href="#">Client</a></li>
                                 <li class="active">List</li>
                             </ol>
                         </div>
@@ -30,7 +30,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 th:text="${student.firstName}"></h4>
+                        <h4 th:text="${client.firstName}"></h4>
                     </div>
                     <div class="card-body">
                         <div class="panel-heading">
@@ -44,29 +44,29 @@
                                 </div>
                                     <div class="row">
                                         <label class="col-sm-6">First Name</label>
-                                        <div class="col-sm-6" th:text="${student.firstName}"></div>
+                                        <div class="col-sm-6" th:text="${client.firstName}"></div>
                                     </div>
 
                                     <div class="row">
                                         <label class="col-sm-6">Last Name</label>
-                                        <div class="col-sm-6" th:text="${student.lastName}"></div>
+                                        <div class="col-sm-6" th:text="${client.lastName}"></div>
                                     </div>
 
                                     <div class="row">
                                         <label class="col-sm-6">Gender</label>
-                                        <div class="col-sm-6" th:text="${student.gender.name}"></div>
+                                        <div class="col-sm-6" th:text="${client.gender.name}"></div>
                                     </div>
                                     <div class="row">
-                                        <label class="col-sm-6">Reg Number</label>
-                                        <div class="col-sm-6" th:text="${student.regNumber}"></div>
+                                        <label class="col-sm-6">PhoneNumber</label>
+                                        <div class="col-sm-6" th:text="${client.phoneNumber}"></div>
                                     </div>
                                     <div class="row">
-                                        <label class="col-sm-6">Age: </label>
-                                        <div class="col-sm-6" th:text="${student.age}"></div>
+                                        <label class="col-sm-6">ID Number </label>
+                                        <div class="col-sm-6" th:text="${client.idNumber}"></div>
                                     </div>
                                     <div class="row">
-                                        <label class="col-sm-6">Program: </label>
-                                        <div class="col-sm-6" th:text="${student.degree.name}"></div>
+                                        <label class="col-sm-6">Email Address</label>
+                                        <div class="col-sm-6" th:text="${client.email}"></div>
                                     </div>
 
 
@@ -86,9 +86,12 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr th:each="account : ${account}">
-                                        <td th:text="${account.amount}"></td>
-                                        <td th:text="${account.dateCreated}"></td>
+                                    <tr>
+<!--                                    <tr th:each="account : ${account}">-->
+<!--                                        <td th:text="${account.amount}"></td>-->
+<!--                                        <td th:text="${account.dateCreated}"></td>-->
+                                        <td>placeholder</td>
+                                        <td>placeholer</td>
 
                                     </tr>
                                     </tbody>
@@ -99,24 +102,24 @@
 
                             <div class="col-md-5">
                                 <div class="row">
-                                    <h4><b>Registered Courses</b></h4>
+                                    <h4><b>Policies</b></h4>
                                 </div>
                                 <table  th:inline="none" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Course</th>
-                                        <th>Grade</th>
-                                        <th>Date Reg</th>
+                                        <th>Policy Id</th>
+                                        <th>Premium</th>
+                                        <th>Date Insured</th>
                                         <th scope="col">Update</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    <tr th:each="registration : ${registration}">
-                                        <td th:text="${registration.course.name}"></td>
-                                         <td th:text="${registration.examMark}"></td>
-                                        <td th:text="${registration.dateCreated}"></td>
-                                        <td><a th:href="@{'/admin/studentAccount/exam/' +${registration.id}+'/'+${student.id}}" class="btn btn-info">Enter Grade</a>                      </td>
+                                    <tr>
+                                        <td>IDadad</td>
+                                         <td>dapdapap</td>
+                                        <td>dadadada</td>
+                                        <td><a th:href="@{'/admin/studentAccount/exam/'}" class="btn btn-info">Enter Grade</a>                      </td>
 
                                     </tr>
                                     </tbody>
@@ -155,37 +158,37 @@
                     <div class="card-body card-block">
 
 
-                        <form autocomplete="off" class="sky-form" th:object="${studentAccount}" method="post"
-                              th:action="@{'/admin/studentAccount/save/' + ${student.id}}" role="form">
-                            <input type="hidden" th:field="*{id}"/>
-                            <div class="form-group"><label for="amount" class=" form-control-label">Amount
-                            </label><input type="text" id="amount" name="amount" th:field="*{amount}"
-                                           required="" placeholder="Enter amount" class="form-control">
-                                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
-                            </div>
+<!--                        <form autocomplete="off" class="sky-form" th:object="${studentAccount}" method="post"-->
+<!--                              th:action="@{'/admin/studentAccount/save/' + ${student.id}}" role="form">-->
+<!--                            <input type="hidden" th:field="*{id}"/>-->
+<!--                            <div class="form-group"><label for="amount" class=" form-control-label">Amount-->
+<!--                            </label><input type="text" id="amount" name="amount" th:field="*{amount}"-->
+<!--                                           required="" placeholder="Enter amount" class="form-control">-->
+<!--                                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>-->
+<!--                            </div>-->
 
 
-                            <div class="form-group">
-                                <label>Select Payment Type </label>
-                                <select class="form-control" th:field="*{paymentType}">
-                                    <option th:each="paymentType : ${paymentType}"
-                                            th:value="${{paymentType}}"
-                                            th:text="${paymentType.name}">
-                                    </option>
-                                </select>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label>Select Payment Type </label>-->
+<!--                                <select class="form-control" th:field="*{paymentType}">-->
+<!--                                    <option th:each="paymentType : ${paymentType}"-->
+<!--                                            th:value="${{paymentType}}"-->
+<!--                                            th:text="${paymentType.name}">-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
 
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
-                            </div>
+<!--                            <div class="card-footer">-->
+<!--                                <button type="submit" class="btn btn-primary btn-sm">-->
+<!--                                    <i class="fa fa-dot-circle-o"></i> Submit-->
+<!--                                </button>-->
+<!--                                <button type="reset" class="btn btn-danger btn-sm">-->
+<!--                                    <i class="fa fa-ban"></i> Reset-->
+<!--                                </button>-->
+<!--                            </div>-->
 
-                        </form>
+<!--                        </form>-->
 
                     </div>
 

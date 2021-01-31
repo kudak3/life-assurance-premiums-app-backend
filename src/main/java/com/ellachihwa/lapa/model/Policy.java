@@ -3,34 +3,29 @@ package com.ellachihwa.lapa.model;
 import com.ellachihwa.lapa.utils.Plan;
 import com.ellachihwa.lapa.utils.Status;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Policy {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
 
-    private Long policyNumber;
     private Long premium;
     @Enumerated
     private Plan plan;
+
+    @OneToMany(mappedBy = "policy")
+    Set<PolicyCoverage> policyCoverageSet;
 
     @Enumerated
     private Status status;
     private Long amount;
     private Long duration;
 
-    public Long getPolicyNumber() {
-        return policyNumber;
-    }
-
-    public void setPolicyNumber(Long policyNumber) {
-        this.policyNumber = policyNumber;
-    }
 
     public Long getPremium() {
         return premium;
@@ -94,5 +89,13 @@ public class Policy {
 
     public void setDuration(Long duration) {
         this.duration = duration;
+    }
+
+    public Set<PolicyCoverage> getPolicyCoverageSet() {
+        return policyCoverageSet;
+    }
+
+    public void setPolicyCoverageSet(Set<PolicyCoverage> policyCoverageSet) {
+        this.policyCoverageSet = policyCoverageSet;
     }
 }

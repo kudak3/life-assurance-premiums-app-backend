@@ -4309,7 +4309,7 @@ function cloneWithOffset(input, model) {
     if (model._isUTC) {
         res = model.clone();
         diff = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
-        // Use low-level api, because this fn is low-level api.
+        // Use low-coverage api, because this fn is low-coverage api.
         res._d.setTime(res._d.valueOf() + diff);
         hooks.updateOffset(res, false);
         return res;
@@ -12103,7 +12103,7 @@ module.exports = function(Chart) {
             if (typeof(rawValue) === 'number' && !isFinite(rawValue)) {
                 return NaN;
             }
-            // If it is in fact an object, dive in one more level
+            // If it is in fact an object, dive in one more coverage
             if (typeof(rawValue) === 'object') {
                 if ((rawValue instanceof Date) || (rawValue.isValid)) {
                     return rawValue;

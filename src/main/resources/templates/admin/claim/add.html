@@ -25,11 +25,6 @@
 
 
 
-                            <div class="form-group"><label for="clientId" class=" form-control-label">Client ID
-                                </label><input type="text" id="clientId" name="clientId" th:field="*{clientId}"
-                                                   required=""        placeholder="Enter a policy name" class="form-control">
-                                <div th:if="${#fields.hasErrors('clientId')}" th:errors="*{clientId}"></div>
-                            </div>
 
                             <div class="form-group"><label for="policyNumber" class=" form-control-label">Policy Number
                             </label><input type="text" id="policyNumber" name="policyNumber" th:field="*{policyNumber}"

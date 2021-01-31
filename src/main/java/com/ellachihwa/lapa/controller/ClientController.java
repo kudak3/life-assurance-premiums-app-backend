@@ -1,8 +1,10 @@
 package com.ellachihwa.lapa.controller;
 
 import com.ellachihwa.lapa.model.Client;
+import com.ellachihwa.lapa.model.PolicyCoverage;
 import com.ellachihwa.lapa.utils.Gender;
 import com.ellachihwa.lapa.service.ClientService;
+import com.ellachihwa.lapa.utils.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +31,25 @@ public class ClientController {
         model.addAttribute("client", client);
         model.addAttribute("gender", Gender.values());
 
+
+
         return "admin/client/add";
+    }
+
+    @GetMapping("view/{id}")
+    public String viewPage(@PathVariable Long id, Model model) {
+
+        Client client = clientService.getClient(id);
+        model.addAttribute("client",client);
+
+        return "admin/client/view";
     }
 
     @PostMapping("save")
     public String saveEmployee(@ModelAttribute("client") Client client) {
         // save employee to database
         clientService.saveClient(client);
-        return "redirect:/";
+        return "redirect:/clients/list";
     }
 
     @GetMapping("/delete/{id}")
@@ -44,6 +57,6 @@ public class ClientController {
 
         // call delete employee method
         clientService.deleteClient(id);
-        return "redirect:/";
+        return "redirect:/clients/list";
     }
 }

@@ -2373,7 +2373,7 @@ function matcherFromTokens( tokens ) {
 		implicitRelative = leadingRelative || Expr.relative[" "],
 		i = leadingRelative ? 1 : 0,
 
-		// The foundational matcher ensures that elements are reachable from top-level context(s)
+		// The foundational matcher ensures that elements are reachable from top-coverage context(s)
 		matchContext = addCombinator( function( elem ) {
 			return elem === checkContext;
 		}, implicitRelative, true ),
@@ -2566,7 +2566,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 };
 
 /**
- * A low-level selection function that works with Sizzle's compiled
+ * A low-coverage selection function that works with Sizzle's compiled
  *  selector functions
  * @param {String|Function} selector A selector or a pre-compiled
  *  selector function built with Sizzle.compile
@@ -2595,7 +2595,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 			if ( !context ) {
 				return results;
 
-			// Precompiled matchers will still verify ancestry, so step up a level
+			// Precompiled matchers will still verify ancestry, so step up a coverage
 			} else if ( compiled ) {
 				context = context.parentNode;
 			}
@@ -3725,7 +3725,7 @@ jQuery( function() {
 	if ( typeof div.style.zoom !== "undefined" ) {
 
 		// Support: IE<8
-		// Check if natively block-level elements act like inline-block
+		// Check if natively block-coverage elements act like inline-block
 		// elements when setting their display to 'inline' and giving
 		// them layout
 		div.style.cssText = "display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1";
@@ -4673,7 +4673,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 					tmp.removeChild( tmp.firstChild );
 				}
 
-				// Remember the top-level container for proper cleanup
+				// Remember the top-coverage container for proper cleanup
 				tmp = safe.lastChild;
 			}
 		}
@@ -7237,7 +7237,7 @@ if ( !support.opacity ) {
 				filter = currentStyle && currentStyle.filter || style.filter || "";
 
 			// IE has trouble with opacity if it does not have layout
-			// Force it by setting the zoom level
+			// Force it by setting the zoom coverage
 			style.zoom = 1;
 
 			// if setting opacity to 1, and no other filters exist -
@@ -7592,8 +7592,8 @@ function defaultPrefilter( elem, props, opts ) {
 
 		if ( checkDisplay === "inline" && jQuery.css( elem, "float" ) === "none" ) {
 
-			// inline-level elements accept inline-block;
-			// block-level elements need to be inline with layout
+			// inline-coverage elements accept inline-block;
+			// block-coverage elements need to be inline with layout
 			if ( !support.inlineBlockNeedsLayout || defaultDisplay( elem.nodeName ) === "inline" ) {
 				style.display = "inline-block";
 			} else {

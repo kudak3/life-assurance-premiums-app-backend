@@ -5,6 +5,7 @@ import com.ellachihwa.lapa.utils.ClaimStatus;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,8 @@ public class InsuranceClaim {
     @Id
     private Long id;
     private Date date;
-    private String clientId;
+    @ManyToOne
+    private Client client;
     private String policyNumber;
     private String description;
     @Enumerated
@@ -34,12 +36,13 @@ public class InsuranceClaim {
         this.date = date;
     }
 
-    public String getClientId() {
-        return clientId;
+
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getDescription() {

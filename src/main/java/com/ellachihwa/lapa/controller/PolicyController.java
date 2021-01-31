@@ -28,7 +28,7 @@ public class PolicyController {
     public String savePolicy(@ModelAttribute("policy") Policy policy) {
         // save employee to database
         policyService.savePolicy(policy);
-        return "redirect:/";
+        return "redirect:/policies/list";
     }
 
     @GetMapping("delete/{id}")

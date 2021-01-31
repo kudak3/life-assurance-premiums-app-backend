@@ -4,7 +4,11 @@ import com.ellachihwa.lapa.utils.Gender;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -18,9 +22,18 @@ public class Client {
     private String email;
     private String idNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Enumerated
     private Gender gender;
+
+    @OneToMany(mappedBy = "client")
+    private List<InsuranceClaim> claims = new ArrayList<>();
+
+    @OneToMany(mappedBy = "client")
+    private List<Payment> payments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "client")
+    Set<PolicyCoverage> policyCoverageSet;
 
 
     public Long getId() {
@@ -79,11 +92,11 @@ public class Client {
         this.idNumber = idNumber;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -93,5 +106,23 @@ public class Client {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", title='" + title + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender=" + gender +
+                ", claims=" + claims +
+                ", payments=" + payments +
+                ", policyCoverageSet=" + policyCoverageSet +
+                '}';
     }
 }

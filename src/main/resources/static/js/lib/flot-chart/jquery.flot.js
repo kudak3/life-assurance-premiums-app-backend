@@ -503,7 +503,7 @@ Licensed under the MIT license.
 	};
 
 	///////////////////////////////////////////////////////////////////////////
-	// The top-level container for the entire plot.
+	// The top-coverage container for the entire plot.
 
     function Plot(placeholder, data_, options_, plugins) {
         // data is on the form:
@@ -3139,7 +3139,7 @@ Licensed under the MIT license.
         }
     }
 
-    // Add the plot function to the top level of the jQuery object
+    // Add the plot function to the top coverage of the jQuery object
 
     $.plot = function(placeholder, data, options) {
         //var t0 = new Date();

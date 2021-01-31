@@ -12,27 +12,37 @@
             <div class="col-md-2"></div>
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header"><strong>Faculty</strong>
+                    <div class="card-header"><strong>Level</strong>
                         <small> Form</small>
                     </div>
                     <div class="card-body card-block">
 
 
-                        <form autocomplete="off" class="sky-form" th:object="${faculty}" method="post"
-                              th:action="@{/admin/faculty/save}" role="form">
+                        <form autocomplete="off" class="sky-form" th:object="${level}" method="post"
+                              th:action="@{/templates/admin/coverage/save}" role="form">
                             <input type="hidden" th:field="*{id}"/>
 
-                            <div class="form-group"><label for="name" class=" form-control-label">Faculty
+
+
+
+                            <div class="form-group"><label for="name" class=" form-control-label">Level
                                 Name</label><input type="text" id="name" name="name" th:field="*{name}"
-                                           required=""        placeholder="Enter your faculty name" class="form-control">
+                                                   required=""        placeholder="Enter your level name" class="form-control">
                                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                             </div>
 
-                            <div class="form-group"><label for="facultyCode" class=" form-control-label">Faculty
-                                Code</label><input type="text" id="facultyCode" name="facultyCode" th:field="*{facultyCode}"
-                                               required=""    placeholder="Enter your faculty code" class="form-control">
-                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{facultyCode}"></div>
-                            </div>
+
+                            <section>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label><b>Please Select Level Courses </b></label>
+                                        <div th:each="course : ${courses}">
+                                            <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />
+                                            <label th:text="${course.name}">example</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
 
                             <div class="card-footer">
@@ -58,4 +68,4 @@
     </div>
 </div>
 </div>
-    <div th:include="fragments/footer"></div>
+<div th:include="fragments/footer"></div>
