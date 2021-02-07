@@ -1,4 +1,4 @@
-package com.ellachihwa.lapa.controller;
+package com.ellachihwa.lapa.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,4 +18,10 @@ public class IndexController {
     public String configurationPage(){
         return "admin/configurations";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }

@@ -18,18 +18,34 @@
                     <div class="card-body card-block">
 
 
-                        <form autocomplete="off" class="sky-form" th:object="${claim}" method="post"
-                              th:action="@{/policies/save}" role="form">
+                        <form autocomplete="off" class="sky-form" name="form" th:object="${claim}" method="post"
+                              th:action="@{/claims/save}" role="form">
                             <input type="hidden" th:field="*{id}"/>
 
 
 
 
 
-                            <div class="form-group"><label for="policyNumber" class=" form-control-label">Policy Number
-                            </label><input type="text" id="policyNumber" name="policyNumber" th:field="*{policyNumber}"
-                                           required=""         placeholder="Enter policy number" class="form-control">
-                                <div th:if="${#fields.hasErrors('policyNumber')}" th:errors="*{policyNumber}"></div>
+                            <div class="form-group">
+                                <label>Select Client</label>
+                                <select class="form-control" required="required" th:field="*{client}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="client : ${clients}"
+                                            th:value="${{client}}"
+                                            th:text="${client.firstName + ' ' + client.lastName + ' ' + client.idNumber}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Policy</label>
+                                <select class="form-control" required="required" th:field="*{policy}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="policy : ${policies}"
+                                            th:value="${{policy}}"
+                                            th:text="${policy.name + ' ' + policy.id}">
+                                    </option>
+                                </select>
                             </div>
 
                             <div class="form-group"><label for="description" class=" form-control-label">Description

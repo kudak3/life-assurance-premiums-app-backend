@@ -1,4 +1,4 @@
-package com.ellachihwa.lapa.controller;
+package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.PolicyCoverage;

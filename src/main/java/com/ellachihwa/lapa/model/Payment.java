@@ -79,7 +79,7 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", client=" + client +
+                ", client=" + client.getFirstName() +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", paymentType=" + paymentType +
                 ", amount=" + amount +

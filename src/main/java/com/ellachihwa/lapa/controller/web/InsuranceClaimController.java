@@ -1,9 +1,10 @@
-package com.ellachihwa.lapa.controller;
+package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.InsuranceClaim;
 import com.ellachihwa.lapa.model.Policy;
 import com.ellachihwa.lapa.repository.PolicyRepository;
+import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.InsuranceClaimService;
 import com.ellachihwa.lapa.service.PolicyService;
 import com.ellachihwa.lapa.utils.ClaimStatus;
@@ -15,11 +16,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("claims/")
 public class InsuranceClaimController {
     @Autowired
-    InsuranceClaimService claimService;
+    private InsuranceClaimService claimService;
+
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private PolicyService policyService;
+
 
     @GetMapping("list")
     public String getAllClaims(Model model){
@@ -31,7 +41,7 @@ public class InsuranceClaimController {
     public String saveClaim(@ModelAttribute("claim") InsuranceClaim claim) {
         // save claim to database
         claimService.saveClaim(claim);
-        return "redirect:/";
+        return "redirect:/claims/list";
     }
 
     @GetMapping("delete/{id}")
@@ -47,7 +57,11 @@ public class InsuranceClaimController {
 
 
         InsuranceClaim claim = new InsuranceClaim();
+        List<Client> clients = clientService.getClients();
+        List<Policy> policies = policyService.getPolicies();
         model.addAttribute("claim", claim);
+        model.addAttribute("clients",clients);
+        model.addAttribute("policies",policies);
         model.addAttribute("statuses", ClaimStatus.values());
 
         return "admin/claim/add";

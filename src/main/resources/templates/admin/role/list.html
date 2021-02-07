@@ -12,7 +12,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>Course Registration List</h1>
+                            <h1>Roles List</h1>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Registered Courses</a></li>
+                                <li><a href="#">Role </a></li>
                                 <li class="active">List</li>
                             </ol>
                         </div>
@@ -35,26 +35,25 @@
 
             <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
                 <br/>
-                <span th:utext="${successMessage}" class="text-success"></span>
-                <thead>
+<!--                <span th:utext="${successMessage}" class="text-success"></span>-->
+<!--                <thead>-->
                 <tr>
-                    <th scope="col">Student Reg No.</th>
-                    <th scope="col">Student Level</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Degree</th>
-                    <th scope="col">Date Registered</th>
-                    <th scope="col">SMS Sender</th>
+                    <th scope="col">Role Id</th>
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="registration : ${registrations}">
-                    <td th:text="${registration.student.regNumber}"></td>
-                    <td th:text="${registration.student.level.name}"></td>
-                    <td th:text="${registration.course.name}"></td>
-                    <td th:text="${registration.course.courseCode}"></td>
-                    <td th:text="${registration.dateCreated}"></td>
-                    <td th:text="${registration.phoneNumber}"></td>
+                <tr th:each="role : ${roles}">
+                    <td th:text="${role.id}"></td>
+                    <td th:text="${role.name}"></td>
+                    <td><a th:href="@{'/roles/update/' + ${role.id}}" class="btn btn-warning">Update</a></h2>
+                    </td>
+                    <td><a th:href="@{'/roles/delete/' + ${role.id}}"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
+                    </td>
 
 
                 </tr>

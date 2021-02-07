@@ -1,24 +1,28 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.ClaimStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
+
 
 @Entity
 public class InsuranceClaim {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
     @ManyToOne
     private Client client;
-    private String policyNumber;
+    @ManyToOne
+    private Policy policy;
     private String description;
     @Enumerated
     private ClaimStatus claimStatus;
+
+
 
     public Long getId() {
         return id;
@@ -28,11 +32,11 @@ public class InsuranceClaim {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -61,11 +65,23 @@ public class InsuranceClaim {
         this.claimStatus = claimStatus;
     }
 
-    public String getPolicyNumber() {
-        return policyNumber;
+    public Policy getPolicy() {
+        return policy;
     }
 
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
+    }
+
+    @Override
+    public String toString() {
+        return "InsuranceClaim{" +
+                "id=" + id +
+                ", date=" + date +
+                ", client=" + client.getFirstName() + " " + client.getLastName() +
+                ", policy=" + policy.getName() + " " + policy.getId() +
+                ", description='" + description + '\'' +
+                ", claimStatus=" + claimStatus +
+                '}';
     }
 }

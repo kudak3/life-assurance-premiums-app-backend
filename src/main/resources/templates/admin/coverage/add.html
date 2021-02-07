@@ -12,37 +12,66 @@
             <div class="col-md-2"></div>
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header"><strong>Level</strong>
+                    <div class="card-header"><strong> Policy coverage </strong>
                         <small> Form</small>
                     </div>
                     <div class="card-body card-block">
 
 
-                        <form autocomplete="off" class="sky-form" th:object="${level}" method="post"
-                              th:action="@{/templates/admin/coverage/save}" role="form">
-                            <input type="hidden" th:field="*{id}"/>
+                        <form autocomplete="off" class="sky-form" name="form" th:object="${coverage}" method="post"
+                              th:action="@{/coverages/save}" role="form">
+<!--                            <input type="hidden" th:field="*{id}"/>-->
 
 
 
 
-                            <div class="form-group"><label for="name" class=" form-control-label">Level
-                                Name</label><input type="text" id="name" name="name" th:field="*{name}"
-                                           required=""        placeholder="Enter your level name" class="form-control">
-                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+                            <div class="form-group">
+                                <label>Select Client</label>
+                                <select class="form-control" required="required" th:field="*{client}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="client : ${clientList}"
+                                            th:value="${{client}}"
+                                            th:text="${client.firstName + ' ' + client.lastName + ' ' + client.idNumber}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Policy</label>
+                                <select class="form-control" required="required" th:field="*{policy}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="policy : ${policies}"
+                                            th:value="${{policy}}"
+                                            th:text="${policy.name + ' ' + policy.id}">
+                                    </option>
+                                </select>
                             </div>
 
 
-                            <section>
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <label><b>Please Select Level Courses </b></label>
-                                        <div th:each="course : ${courses}">
-                                            <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />
-                                            <label th:text="${course.name}">example</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+
+
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('date')}? 'has-error':''">
+                                <label for="date" class="control-label">Enter date :
+                                </label> <input id="date" class="form-control"
+                                                required=""            type="date" th:field="*{date}"/>
+                                <p class="error-message"
+                                   th:each="error : ${#fields.errors('date')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Status</label>
+                                <select class="form-control" required="required" th:field="*{status}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="status : ${coverageStatuses}"
+                                            th:value="${{status}}"
+                                            th:text="${status.name}">
+                                    </option>
+                                </select>
+                            </div>
+
 
 
                             <div class="card-footer">
@@ -55,7 +84,7 @@
                             </div>
 
                         </form>
-                        <span th:utext="${successMessage}">
+                        <!--                        <span th:utext="${successMessage}"></span>-->
 
                     </div>
                 </div>
@@ -68,4 +97,5 @@
     </div>
 </div>
 </div>
-    <div th:include="fragments/footer"></div>
+<div th:include="fragments/footer"></div>
+</html>

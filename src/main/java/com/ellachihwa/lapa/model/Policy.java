@@ -4,6 +4,8 @@ import com.ellachihwa.lapa.utils.Plan;
 import com.ellachihwa.lapa.utils.Status;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +27,9 @@ public class Policy {
     private Status status;
     private Long amount;
     private Long duration;
+
+    @OneToMany(mappedBy = "policy")
+    private List<InsuranceClaim> claims = new ArrayList<>();
 
 
     public Long getPremium() {
@@ -97,5 +102,21 @@ public class Policy {
 
     public void setPolicyCoverageSet(Set<PolicyCoverage> policyCoverageSet) {
         this.policyCoverageSet = policyCoverageSet;
+    }
+
+    @Override
+    public String toString() {
+        return "Policy{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", premium=" + premium +
+                ", plan=" + plan +
+                ", policyCoverageSet=" + policyCoverageSet +
+                ", status=" + status +
+                ", amount=" + amount +
+                ", duration=" + duration +
+                ", claims=" + claims +
+                '}';
     }
 }

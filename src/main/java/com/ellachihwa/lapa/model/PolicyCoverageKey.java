@@ -40,4 +40,12 @@ public class PolicyCoverageKey implements Serializable {
     public int hashCode() {
         return Objects.hash(getClientId(), getPolicyId());
     }
+
+    @Override
+    public String toString() {
+        return "PolicyCoverageKey{" +
+                "clientId=" + clientId +
+                ", policyId=" + policyId +
+                '}';
+    }
 }

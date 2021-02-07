@@ -1,7 +1,8 @@
-package com.ellachihwa.lapa.controller;
+package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.Payment;
+import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.PaymentService;
 import com.ellachihwa.lapa.service.PolicyService;
 import com.ellachihwa.lapa.utils.Gender;
@@ -24,6 +25,9 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    @Autowired
+    private ClientService clientService;
+
     @GetMapping("/list")
     public String getPayments(Model model){
         model.addAttribute("payments", paymentService.getPayments());
@@ -33,11 +37,13 @@ public class PaymentController {
 
     @GetMapping("add")
     public String addPage(Model model) {
+        List<Client> clients = clientService.getClients();
 
 
         Payment payment = new Payment();
         model.addAttribute("payment", payment);
         model.addAttribute("paymentType", PaymentType.values());
+        model.addAttribute("clients",clients);
 
         return "admin/payment/add";
     }

@@ -23,6 +23,8 @@ public class InsuranceClaimService {
     }
 
     public void saveClaim(InsuranceClaim claim){
+        System.out.println("====================");
+        System.out.println(claim);
         insuranceClaimRepository.save(claim);
     }
 

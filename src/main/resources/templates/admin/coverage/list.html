@@ -39,8 +39,9 @@
 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead>
                 <tr>
-                    <th>Client ID</th>
-                    <th>Policy ID</th>
+                    <th>Policy Number</th>
+                    <th>Client</th>
+                    <th>Policy</th>
                     <th>Payment Type</th>
                     <th>Date Insured</th>
 
@@ -49,10 +50,12 @@
 
                 <tbody>
                 <tr th:each="cover : ${coverages}">
-                    <td th:text="${cover.clientId}"></td>
-                  <td th:text="${cover.policyId}">
+                    <td th:text="${'C'+cover.client.id+'P'+cover.policy.id}">
+                    </td>
+                    <td th:text="${cover.client.firstName + ' ' + cover.client.lastName + ' ' + cover.client.idNumber}"></td>
+                  <td th:text="${cover.policy.name + ' ' + cover.policy.id}">
                   </td>
-                    <td th:text="${cover.paymentType}">
+                    <td th:text="${cover.status}">
                     </td>
                     <td th:text="${cover.date}">
                     </td>

@@ -20,6 +20,8 @@ public class CoverageService {
 
 
     public List<PolicyCoverage> getCoverageList(){
+        System.out.println("==============");
+        System.out.println(coverageRepository.findAll());
         return coverageRepository.findAll();
     }
 
