@@ -1,23 +1,29 @@
 package com.ellachihwa.lapa.model;
 
-import com.ellachihwa.lapa.utils.PaymentType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+
 
 @Entity
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonManagedReference
     @ManyToOne
     private Client client;
     private String accountNumber;
-    @Enumerated
+
+    @OneToOne
     private PaymentType paymentType;
     private Long amount;
     private String description;
     private Date date;
+    
 
     public Long getId() {
         return id;

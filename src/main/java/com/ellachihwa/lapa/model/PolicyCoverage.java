@@ -1,11 +1,13 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.CoverageStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
@@ -13,25 +15,27 @@ public class PolicyCoverage {
     @EmbeddedId
     private PolicyCoverageKey id = new PolicyCoverageKey();
 
-    @ManyToOne
+    @JsonManagedReference
+    @ManyToOne()
     @MapsId("clientId")
     private Client client;
 
-    @ManyToOne
+    @JsonManagedReference
+    @ManyToOne()
     @MapsId("policyId")
     private Policy policy;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+
+    private Date date;
     @Enumerated
     private CoverageStatus status;
 
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

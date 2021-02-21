@@ -109,7 +109,7 @@ ____________________________________________________
 
 		plot.hooks.processOptions.push(processOptions);
 
-		//if the plugin is active register processDatapoints method
+		//if the plugin is active register processDatapoints payment-type
 		function processOptions(plot, options) {
 			if (options.series.curvedLines.active) {
 				plot.hooks.processDatapoints.unshift(processDatapoints);
@@ -191,7 +191,7 @@ ____________________________________________________
 
 			//sample the function
 			// (the result is intependent from the input data =>
-			//	it is ok to alter the input after this method)
+			//	it is ok to alter the input after this payment-type)
 			var j = 0;
 			for (var i = 0; i < points.length - ps; i += ps) {
 				var curX = i;
@@ -248,7 +248,7 @@ ____________________________________________________
 			}
 
 			//get the values for the desired gradients  m_k for all points k
-			//depending on the used method the formula is different
+			//depending on the used payment-type the formula is different
 			var gradients = [segmentSlopes[0]];	
 			if (curvedLinesOptions.monotonicFit) {
 				// Fritsch Carlson

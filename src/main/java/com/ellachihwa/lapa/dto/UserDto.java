@@ -8,6 +8,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String password;
+    private String confirmPassword;
     private Long role;
 
     public UserDto(){
@@ -54,5 +55,13 @@ public class UserDto {
 
     public void setRole(Long role) {
         this.role = role;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

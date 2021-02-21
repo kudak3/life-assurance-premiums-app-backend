@@ -1,12 +1,12 @@
 package com.ellachihwa.lapa.controller.mobile;
 
-import com.ellachihwa.lapa.model.Client;
-import com.ellachihwa.lapa.model.User;
+import com.ellachihwa.lapa.model.*;
 import com.ellachihwa.lapa.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -36,6 +36,27 @@ public class ClientMobileController {
      return  clientService.updateClient(client);
 
     }
+    @GetMapping("/{id}/coverages")
+    public List<PolicyCoverage> getClientPolicyCoverages(@PathVariable("id") Long id){
+        return clientService.getClientCoverages(id);
+    }
+
+    @GetMapping("/{id}/payments")
+    public List<Payment> getClientPaymentHistory(@PathVariable("id") Long id){
+        return clientService.getPaymentHistory(id);
+    }
+
+    @GetMapping("/{id}/claims")
+    public List<InsuranceClaim> getClientClaims(@PathVariable("id") Long id){
+        return clientService.getClaims(id);
+
+    }
+
+//    @GetMapping("/{id}/policies")
+//    public List<Policy> getClientPolicies(@PathVariable("id") Long id){
+//        return clientService.getPolicies(id);
+//    }
+
 
 
 }

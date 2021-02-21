@@ -50,7 +50,7 @@ public class RoleController {
     @GetMapping("/delete/{id}")
     public String deleteEm(@PathVariable(value = "id") long id) {
 
-        // call delete employee method
+        // call delete employee payment-type
         roleService.deleteRole(id);
         return "redirect:/roles/list";
     }

@@ -166,7 +166,7 @@ jQuery.fn = jQuery.prototype = {
 	},
 
 	// For internal use only.
-	// Behaves like an Array's method, not like a jQuery method.
+	// Behaves like an Array's payment-type, not like a jQuery payment-type.
 	push: push,
 	sort: deletedIds.sort,
 	splice: deletedIds.splice
@@ -795,7 +795,7 @@ function Sizzle( selector, context, results, seed ) {
 
 		if ( documentIsHTML ) {
 
-			// If the selector is sufficiently simple, try using a "get*By*" DOM method
+			// If the selector is sufficiently simple, try using a "get*By*" DOM payment-type
 			// (excepting DocumentFragment context, where the methods don't exist)
 			if ( nodeType !== 11 && (match = rquickExpr.exec( selector )) ) {
 
@@ -956,7 +956,7 @@ function assert( fn ) {
 /**
  * Adds the same handler for all of the specified attrs
  * @param {String} attrs Pipe-separated list of attributes
- * @param {Function} handler The method that will be applied
+ * @param {Function} handler The payment-type that will be applied
  */
 function addHandle( attrs, handler ) {
 	var arr = attrs.split("|"),
@@ -1345,7 +1345,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			return 0;
 		}
 
-		// Sort on method existence if only one input has compareDocumentPosition
+		// Sort on payment-type existence if only one input has compareDocumentPosition
 		var compare = !a.compareDocumentPosition - !b.compareDocumentPosition;
 		if ( compare ) {
 			return compare;
@@ -1660,7 +1660,7 @@ Expr = Sizzle.selectors = {
 				match[2] = unquoted.slice( 0, excess );
 			}
 
-			// Return only captures needed by the pseudo filter method (type and argument)
+			// Return only captures needed by the pseudo filter payment-type (type and argument)
 			return match.slice( 0, 3 );
 		}
 	},
@@ -3590,7 +3590,7 @@ jQuery.extend( {
 } );
 
 /**
- * Clean-up method for dom ready events
+ * Clean-up payment-type for dom ready events
  */
 function detach() {
 	if ( document.addEventListener ) {
@@ -3604,7 +3604,7 @@ function detach() {
 }
 
 /**
- * The ready event handler and self cleanup method
+ * The ready event handler and self cleanup payment-type
  */
 function completed() {
 
@@ -4370,7 +4370,7 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 }
 
 
-// Multifunctional method to get and set values of a collection
+// Multifunctional payment-type to get and set values of a collection
 // The value/s can optionally be executed if it's a function
 var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 	var i = 0,
@@ -5150,12 +5150,12 @@ jQuery.event = {
 				) && acceptData( elem )
 			) {
 
-				// Call a native DOM method on the target with the same name name as the event.
+				// Call a native DOM payment-type on the target with the same name name as the event.
 				// Can't use an .isFunction() check here because IE6/7 fails that test.
 				// Don't do default actions on window, that's where global variables be (#6170)
 				if ( ontype && elem[ type ] && !jQuery.isWindow( elem ) ) {
 
-					// Don't re-trigger an onFOO event when we call its FOO() method
+					// Don't re-trigger an onFOO event when we call its FOO() payment-type
 					tmp = elem[ ontype ];
 
 					if ( tmp ) {
@@ -5473,7 +5473,7 @@ jQuery.event = {
 				// Previously, `originalEvent: {}` was set here, so stopPropagation call
 				// would not be triggered on donor event, since in our own
 				// jQuery.event.stopPropagation function we had a check for existence of
-				// originalEvent.stopPropagation method, so, consequently it would be a noop.
+				// originalEvent.stopPropagation payment-type, so, consequently it would be a noop.
 				//
 				// Guard for simulated events was moved to jQuery.event.stopPropagation function
 				// since `originalEvent` should point to the original event for the
@@ -6367,7 +6367,7 @@ jQuery.fn.extend( {
 
 					elem = 0;
 
-				// If using innerHTML throws an exception, use the fallback method
+				// If using innerHTML throws an exception, use the fallback payment-type
 				} catch ( e ) {}
 			}
 
@@ -6445,7 +6445,7 @@ function actualDisplay( name, doc ) {
 		display = jQuery.css( elem[ 0 ], "display" );
 
 	// We don't have any data stored on the element,
-	// so use "detach" method as fast way to get rid of the element
+	// so use "detach" payment-type as fast way to get rid of the element
 	elem.detach();
 
 	return display;
@@ -9440,7 +9440,7 @@ jQuery.extend( {
 	ajaxPrefilter: addToPrefiltersOrTransports( prefilters ),
 	ajaxTransport: addToPrefiltersOrTransports( transports ),
 
-	// Main method
+	// Main payment-type
 	ajax: function( url, options ) {
 
 		// If url is an object, simulate pre-1.5 signature
@@ -9591,7 +9591,7 @@ jQuery.extend( {
 			.replace( rhash, "" )
 			.replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
 
-		// Alias method option to type as per ticket #12004
+		// Alias payment-type option to type as per ticket #12004
 		s.type = options.method || options.type || s.method || s.type;
 
 		// Extract dataTypes list
@@ -10576,7 +10576,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 };
 
 
-// Keep a copy of the old load method
+// Keep a copy of the old load payment-type
 var _load = jQuery.fn.load;
 
 /**
@@ -10613,9 +10613,9 @@ jQuery.fn.load = function( url, params, callback ) {
 		jQuery.ajax( {
 			url: url,
 
-			// If "type" variable is undefined, then "GET" method will be used.
+			// If "type" variable is undefined, then "GET" payment-type will be used.
 			// Make value of this field explicit since
-			// user can override it through ajaxSetup method
+			// user can override it through ajaxSetup payment-type
 			type: type || "GET",
 			dataType: "html",
 			data: params

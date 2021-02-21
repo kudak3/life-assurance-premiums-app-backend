@@ -20,6 +20,13 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Role> roles;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_client",joinColumns =
+            { @JoinColumn(name = "user_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "client_id", referencedColumnName = "id") })
+    private Client client;
+
     public User() {
 
     }

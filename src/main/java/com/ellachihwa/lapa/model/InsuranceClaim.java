@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
@@ -12,8 +13,8 @@ public class InsuranceClaim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+
+    private Date date;
     @ManyToOne
     private Client client;
     @ManyToOne
@@ -32,11 +33,11 @@ public class InsuranceClaim {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

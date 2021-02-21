@@ -1,10 +1,8 @@
 package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
-import com.ellachihwa.lapa.model.PolicyCoverage;
 import com.ellachihwa.lapa.utils.Gender;
 import com.ellachihwa.lapa.service.ClientService;
-import com.ellachihwa.lapa.utils.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +23,6 @@ public class ClientController {
 
     @GetMapping("add")
     public String addPage(Model model) {
-
 
         Client client = new Client();
         model.addAttribute("client", client);
@@ -55,7 +52,7 @@ public class ClientController {
     @GetMapping("/delete/{id}")
     public String deleteEm(@PathVariable(value = "id") long id) {
 
-        // call delete employee method
+        // call delete employee payment-type
         clientService.deleteClient(id);
         return "redirect:/clients/list";
     }

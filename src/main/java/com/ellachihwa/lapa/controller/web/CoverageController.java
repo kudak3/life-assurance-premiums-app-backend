@@ -8,7 +8,6 @@ import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.CoverageService;
 import com.ellachihwa.lapa.service.PolicyService;
 import com.ellachihwa.lapa.utils.CoverageStatus;
-import com.ellachihwa.lapa.utils.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

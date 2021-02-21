@@ -56,16 +56,22 @@
                                 <div th:if="${#fields.hasErrors('premium')}" th:errors="*{premium}"></div>
                             </div>
 
-                            <div class="form-group"><label for="amount" class=" form-control-label">Amount
-                            </label><input type="text" id="amount" name="amount" th:field="*{amount}"
+                            <div class="form-group"><label for="totalPayment" class=" form-control-label">Total Payment
+                            </label><input type="text" id="totalPayment" name="totalPayment" th:field="*{totalPayment}"
                                            required=""         placeholder="Enter policy amount" class="form-control">
-                                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+                                <div th:if="${#fields.hasErrors('totalPayment')}" th:errors="*{totalPayment}"></div>
                             </div>
 
                             <div class="form-group"><label for="duration" class=" form-control-label">Duration
                             </label><input type="text" id="duration" name="duration" th:field="*{duration}"
-                                           required=""         placeholder="Enter policy descrition" class="form-control">
+                                           required=""         placeholder="Enter policy description" class="form-control">
                                 <div th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="coverageAmount" class=" form-control-label">Cover Amount
+                            </label><input type="text" id="coverageAmount" name="coverageAmount" th:field="*{coverageAmount}"
+                                           required=""         placeholder="Enter the amount of cover the policy provides" class="form-control">
+                                <div th:if="${#fields.hasErrors('coverageAmount')}" th:errors="*{coverageAmount}"></div>
                             </div>
 
 

@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,20 +39,25 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User save(UserDto userDto){
-        User userExists = userRepository.findByEmail(userDto.getEmail());
-        if(userExists == null) {
+    public User save(UserDto userDto) {
+
+
+        if(userRepository.findByEmail(userDto.getEmail()) != null){
+            System.out.println("here");
+            return null;
+        }else {
+            System.out.println("there");
             Role role = roleRepository.getOne(userDto.getRole());
             User user = new User(userDto.getFirstName(),
                     userDto.getLastName(), userDto.getEmail(),
                     passwordEncoder.encode(userDto.getPassword()), Arrays.asList(role));
             return userRepository.save(user);
+        }
 
-        }else return null;
     }
 
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 
         User user = userRepository.findByEmail(username);
         if(user == null) {

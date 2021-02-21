@@ -55,10 +55,11 @@
                     <td th:text="${cover.client.firstName + ' ' + cover.client.lastName + ' ' + cover.client.idNumber}"></td>
                   <td th:text="${cover.policy.name + ' ' + cover.policy.id}">
                   </td>
-                    <td th:text="${cover.status}">
+                    <td th:text="${cover.pay}">
                     </td>
                     <td th:text="${cover.date}">
                     </td>
+
                     <td><a th:href="@{'/admin/level/update/' + ${cover.id}}" class="btn btn-warning">Update</a></h2>
 
                     <a th:href="@{'/admin/level/delete/' + ${cover.id}}"

@@ -47,7 +47,7 @@ public class InsuranceClaimController {
     @GetMapping("delete/{id}")
     public String deleteClaim(@PathVariable(value = "id") long id) {
 
-        // call delete policy method
+        // call delete policy payment-type
         claimService.deleteClaimById(id);
         return "redirect:/admin/claim/list";
     }

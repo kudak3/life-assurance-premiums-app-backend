@@ -1,6 +1,7 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.Gender;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +23,26 @@ public class Client {
     private String phoneNumber;
     private String email;
     private String idNumber;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+
+
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
     @Enumerated
     private Gender gender;
+    @OneToOne(mappedBy = "client")
+    private User user;
 
     @OneToMany(mappedBy = "client")
     private List<InsuranceClaim> claims = new ArrayList<>();
 
+
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Payment> payments = new ArrayList<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
-    Set<PolicyCoverage> policyCoverageSet;
+    List<PolicyCoverage> policyCoverageList;
 
 
     public Long getId() {
@@ -92,11 +101,15 @@ public class Client {
         this.idNumber = idNumber;
     }
 
-    public LocalDate getDateOfBirth() {
+
+    public Date getDateOfBirth() {
+
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
+        System.out.println("-------------");
+        System.out.println(dateOfBirth);
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -106,6 +119,30 @@ public class Client {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public List<InsuranceClaim> getClaims() {
+        return claims;
+    }
+
+    public void setClaims(List<InsuranceClaim> claims) {
+        this.claims = claims;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public List<PolicyCoverage> getPolicyCoverageList() {
+        return policyCoverageList;
+    }
+
+    public void setPolicyCoverageList(List<PolicyCoverage> policyCoverageSet) {
+        this.policyCoverageList = policyCoverageSet;
     }
 
     @Override
@@ -122,7 +159,7 @@ public class Client {
                 ", gender=" + gender +
                 ", claims=" + claims +
                 ", payments=" + payments +
-                ", policyCoverageSet=" + policyCoverageSet +
+                ", policyCoverageSet=" + policyCoverageList +
                 '}';
     }
 }

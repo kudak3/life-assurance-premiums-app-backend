@@ -7,6 +7,7 @@ import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserMobileController {
     }
 
     @PostMapping
-    public User signUpUser(@RequestBody UserDto userDto){
+    public User signUpUser(@RequestBody UserDto userDto) {
 
      return userService.save(userDto);
     }

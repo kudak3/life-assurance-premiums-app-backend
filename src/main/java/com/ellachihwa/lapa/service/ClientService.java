@@ -1,7 +1,9 @@
 package com.ellachihwa.lapa.service;
 
-import com.ellachihwa.lapa.model.Client;
+import com.ellachihwa.lapa.model.*;
 import com.ellachihwa.lapa.repository.ClientRepository;
+import com.ellachihwa.lapa.repository.CoverageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,8 @@ private final ClientRepository clientRepository;
         this.clientRepository = clientRepository;
     }
 
+    @Autowired
+    private CoverageRepository coverageRepository;
 
     public List<Client> getClients(){
         return clientRepository.findAll();
@@ -38,21 +42,31 @@ private final ClientRepository clientRepository;
 
                     return clientRepository.save(client);
                 })
-                .orElseGet(() -> null);
+                .orElse( null);
 
     }
 
     public Client getClient(Long id){
-        Client client = clientRepository.findById(id).orElse(null);
+      return clientRepository.findById(id).orElse(null);
 
-        if (client==null) {
-
-            throw new RuntimeException("Cannot find Contact with id: " + id);
-
-        }
-
-        else return client;
     }
+
+    public List<PolicyCoverage> getClientCoverages(Long id){
+
+      return  coverageRepository.findPolicyCoveragesByClient_Id(id).orElse(null);
+            }
+
+    public List<Payment> getPaymentHistory(Long id){
+        return clientRepository.findById(id).map(client -> client.getPayments()).orElse(null);
+    }
+
+    public List<InsuranceClaim> getClaims(Long id){
+        return clientRepository.findById(id).map(client -> client.getClaims()).orElse(null);
+    }
+
+//    public List<Policy> getPolicies(){
+//        return clientRepository.findById(id).map(client -> client.getP)
+//    }
 
 
 }

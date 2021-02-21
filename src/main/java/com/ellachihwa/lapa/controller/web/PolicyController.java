@@ -34,9 +34,9 @@ public class PolicyController {
     @GetMapping("delete/{id}")
     public String deleteEm(@PathVariable(value = "id") long id) {
 
-        // call delete policy method
+        // call delete policy payment-type
         policyService.deletePolicy(id);
-        return "redirect:/admin/policy/list";
+        return "redirect:/policies/list";
     }
 
     @GetMapping("add")

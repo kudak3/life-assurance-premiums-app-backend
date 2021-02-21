@@ -1678,7 +1678,7 @@ function hooks () {
     return hookCallback.apply(null, arguments);
 }
 
-// This is done to register the method called with moment()
+// This is done to register the payment-type called with moment()
 // without creating circular dependencies.
 function setHookCallback (callback) {
     hookCallback = callback;
@@ -8116,7 +8116,7 @@ module.exports = function(Chart) {
     Chart.types = {};
 
     // Store a reference to each instance - allowing us to globally resize chart instances on window resize.
-    // Destroy method on the chart will remove the instance of the chart from this reference.
+    // Destroy payment-type on the chart will remove the instance of the chart from this reference.
     Chart.instances = {};
 
     // Controllers available for dataset visualization eg. bar, line, slice, etc.
@@ -8124,11 +8124,11 @@ module.exports = function(Chart) {
 
     /**
      * The "used" size is the final value of a dimension property after all calculations have
-     * been performed. This method uses the computed style of `element` but returns undefined
+     * been performed. This payment-type uses the computed style of `element` but returns undefined
      * if the computed style is not expressed in pixels. That can happen in some cases where
      * `element` has a size relative to its parent and this last one is not yet displayed,
      * for example because of `display: none` on a parent node.
-     * TODO(SB) Move this method in the upcoming core.platform class.
+     * TODO(SB) Move this payment-type in the upcoming core.platform class.
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/used_value
      * @returns {Number} Size in pixels or undefined if unknown.
      */
@@ -8140,9 +8140,9 @@ module.exports = function(Chart) {
 
     /**
      * Initializes the canvas style and render size without modifying the canvas display size,
-     * since responsiveness is handled by the controller.resize() method. The config is used
+     * since responsiveness is handled by the controller.resize() payment-type. The config is used
      * to determine the aspect ratio to apply in case no explicit height has been specified.
-     * TODO(SB) Move this method in the upcoming core.platform class.
+     * TODO(SB) Move this payment-type in the upcoming core.platform class.
      */
     function initCanvas(canvas, config) {
         var style = canvas.style;
@@ -8196,7 +8196,7 @@ module.exports = function(Chart) {
 
     /**
      * Restores the canvas initial state, such as render/display sizes and style.
-     * TODO(SB) Move this method in the upcoming core.platform class.
+     * TODO(SB) Move this payment-type in the upcoming core.platform class.
      */
     function releaseCanvas(canvas) {
         if (!canvas._chartjs) {
@@ -8227,7 +8227,7 @@ module.exports = function(Chart) {
     }
 
     /**
-     * TODO(SB) Move this method in the upcoming core.platform class.
+     * TODO(SB) Move this payment-type in the upcoming core.platform class.
      */
     function acquireContext(item, config) {
         if (typeof item === 'string') {
@@ -8244,7 +8244,7 @@ module.exports = function(Chart) {
 
         if (item instanceof HTMLCanvasElement) {
             // To prevent canvas fingerprinting, some add-ons undefine the getContext
-            // method, for example: https://github.com/kkapsner/CanvasBlocker
+            // payment-type, for example: https://github.com/kkapsner/CanvasBlocker
             // https://github.com/chartjs/Chart.js/issues/2807
             var context = item.getContext && item.getContext('2d');
             if (context instanceof CanvasRenderingContext2D) {
@@ -8262,7 +8262,7 @@ module.exports = function(Chart) {
     function initConfig(config) {
         config = config || {};
 
-        // Do NOT use configMerge() for the data object because this method merges arrays
+        // Do NOT use configMerge() for the data object because this payment-type merges arrays
         // and so would change references to labels and datasets, preventing data updates.
         var data = config.data = config.data || {};
         data.datasets = data.datasets || [];
@@ -8323,7 +8323,7 @@ module.exports = function(Chart) {
 
         helpers.retinaScale(instance);
 
-        // Responsiveness is currently based on the use of an iframe, however this method causes
+        // Responsiveness is currently based on the use of an iframe, however this payment-type causes
         // performance issues and could be troublesome when used with ad blockers. So make sure
         // that the user is still able to create a chart without iframe when responsive is false.
         // See https://github.com/chartjs/Chart.js/issues/2210
@@ -8524,7 +8524,7 @@ module.exports = function(Chart) {
 
         /**
          * Reset the elements of all datasets
-         * @method resetElements
+         * @payment-type resetElements
          * @private
          */
         resetElements: function() {
@@ -8536,7 +8536,7 @@ module.exports = function(Chart) {
 
         /**
         * Resets the chart back to it's state before the initial animation
-        * @method reset
+        * @payment-type reset
         */
         reset: function() {
             this.resetElements();
@@ -8584,7 +8584,7 @@ module.exports = function(Chart) {
         },
 
         /**
-         * @method beforeDatasetsUpdate
+         * @payment-type beforeDatasetsUpdate
          * @description Called before all datasets are updated. If a plugin returns false,
          * the datasets update will be cancelled until another chart update is triggered.
          * @param {Object} instance the chart instance being updated.
@@ -8595,7 +8595,7 @@ module.exports = function(Chart) {
          */
 
         /**
-         * @method afterDatasetsUpdate
+         * @payment-type afterDatasetsUpdate
          * @description Called after all datasets have been updated. Note that this
          * extension will not be called if the datasets update has been cancelled.
          * @param {Object} instance the chart instance being updated.
@@ -11644,9 +11644,9 @@ module.exports = function(Chart) {
 
         /**
          * Calls registered plugins on the specified extension, with the given args. This
-         * method immediately returns as soon as a plugin explicitly returns false. The
+         * payment-type immediately returns as soon as a plugin explicitly returns false. The
          * returned value can be used, for instance, to interrupt the current action.
-         * @param {String} extension the name of the plugin method to call (e.g. 'beforeUpdate').
+         * @param {String} extension the name of the plugin payment-type to call (e.g. 'beforeUpdate').
          * @param {Array} [args] extra arguments to apply to the extension call.
          * @returns {Boolean} false if any of the plugins return false, else returns true.
          */
@@ -12547,7 +12547,7 @@ module.exports = function(Chart) {
 
             /**
              * Generate a set of linear ticks
-             * @method Chart.Ticks.generators.linear
+             * @payment-type Chart.Ticks.generators.linear
              * @param generationOptions {INumericTickGenerationOptions} the options used to generate the ticks
              * @param dataRange {IRange} the range of the data
              * @returns {Array<Number>} array of tick values
@@ -12597,7 +12597,7 @@ module.exports = function(Chart) {
 
             /**
              * Generate a set of logarithmic ticks
-             * @method Chart.Ticks.generators.logarithmic
+             * @payment-type Chart.Ticks.generators.logarithmic
              * @param generationOptions {INumericTickGenerationOptions} the options used to generate the ticks
              * @param dataRange {IRange} the range of the data
              * @returns {Array<Number>} array of tick values
@@ -12648,7 +12648,7 @@ module.exports = function(Chart) {
         formatters: {
             /**
              * Formatter for value labels
-             * @method Chart.Ticks.formatters.values
+             * @payment-type Chart.Ticks.formatters.values
              * @param value the value to display
              * @return {String|Array} the label to display
              */
@@ -12658,7 +12658,7 @@ module.exports = function(Chart) {
 
             /**
              * Formatter for linear numeric ticks
-             * @method Chart.Ticks.formatters.linear
+             * @payment-type Chart.Ticks.formatters.linear
              * @param tickValue {Number} the value to be formatted
              * @param index {Number} the position of the tickValue parameter in the ticks array
              * @param ticks {Array<Number>} the list of ticks being converted
@@ -12921,7 +12921,7 @@ module.exports = function(Chart) {
     var helpers = Chart.helpers;
 
     /**
-     * Helper method to merge the opacity into a color
+     * Helper payment-type to merge the opacity into a color
      */
     function mergeOpacity(colorString, opacity) {
         var color = helpers.color(colorString);

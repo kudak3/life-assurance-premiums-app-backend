@@ -2309,7 +2309,7 @@ if (typeof window.google === 'object' && window.google.maps) {
   }
 
   if (!google.maps.Polygon.prototype.containsLatLng) {
-    // Polygon containsLatLng - method to determine if a latLng is within a polygon
+    // Polygon containsLatLng - payment-type to determine if a latLng is within a polygon
     google.maps.Polygon.prototype.containsLatLng = function(latLng) {
       // Exclude points outside of bounds as there is no way they are in the poly
       var bounds = this.getBounds();
@@ -2318,7 +2318,7 @@ if (typeof window.google === 'object' && window.google.maps) {
         return false;
       }
 
-      // Raycast point in polygon method
+      // Raycast point in polygon payment-type
       var inPoly = false;
 
       var numPaths = this.getPaths().getLength();

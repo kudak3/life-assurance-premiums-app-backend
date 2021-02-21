@@ -3,10 +3,8 @@ package com.ellachihwa.lapa.controller.web;
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.Payment;
 import com.ellachihwa.lapa.service.ClientService;
+import com.ellachihwa.lapa.service.PaymentTypeService;
 import com.ellachihwa.lapa.service.PaymentService;
-import com.ellachihwa.lapa.service.PolicyService;
-import com.ellachihwa.lapa.utils.Gender;
-import com.ellachihwa.lapa.utils.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +26,9 @@ public class PaymentController {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private PaymentTypeService paymentTypeService;
+
     @GetMapping("/list")
     public String getPayments(Model model){
         model.addAttribute("payments", paymentService.getPayments());
@@ -40,9 +41,10 @@ public class PaymentController {
         List<Client> clients = clientService.getClients();
 
 
+
         Payment payment = new Payment();
         model.addAttribute("payment", payment);
-        model.addAttribute("paymentType", PaymentType.values());
+        model.addAttribute("paymentType", paymentTypeService.getPaymentTypes());
         model.addAttribute("clients",clients);
 
         return "admin/payment/add";
@@ -52,7 +54,7 @@ public class PaymentController {
     public String savePayment(@ModelAttribute("payment") Payment payment) {
         // save payment to database
         paymentService.savePayment(payment);
-        return "redirect:/";
+        return "redirect:/payments/list";
     }
 
     @GetMapping("/delete/{id}")

@@ -2,11 +2,11 @@ package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.Plan;
 import com.ellachihwa.lapa.utils.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Policy {
@@ -20,12 +20,14 @@ public class Policy {
     @Enumerated
     private Plan plan;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "policy")
-    Set<PolicyCoverage> policyCoverageSet;
+    List<PolicyCoverage> policyCoverageList;
 
     @Enumerated
     private Status status;
-    private Long amount;
+    private Long totalPayment;
+    private Long coverageAmount;
     private Long duration;
 
     @OneToMany(mappedBy = "policy")
@@ -80,12 +82,12 @@ public class Policy {
         this.description = description;
     }
 
-    public Long getAmount() {
-        return amount;
+    public Long getTotalPayment() {
+        return totalPayment;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setTotalPayment(Long amount) {
+        this.totalPayment = amount;
     }
 
     public Long getDuration() {
@@ -96,12 +98,28 @@ public class Policy {
         this.duration = duration;
     }
 
-    public Set<PolicyCoverage> getPolicyCoverageSet() {
-        return policyCoverageSet;
+    public List<PolicyCoverage> getPolicyCoverageList() {
+        return policyCoverageList;
     }
 
-    public void setPolicyCoverageSet(Set<PolicyCoverage> policyCoverageSet) {
-        this.policyCoverageSet = policyCoverageSet;
+    public void setPolicyCoverageList(List<PolicyCoverage> policyCoverageSet) {
+        this.policyCoverageList = policyCoverageSet;
+    }
+
+    public Long getCoverageAmount() {
+        return coverageAmount;
+    }
+
+    public void setCoverageAmount(Long coverageAmount) {
+        this.coverageAmount = coverageAmount;
+    }
+
+    public List<InsuranceClaim> getClaims() {
+        return claims;
+    }
+
+    public void setClaims(List<InsuranceClaim> claims) {
+        this.claims = claims;
     }
 
     @Override
@@ -112,9 +130,9 @@ public class Policy {
                 ", description='" + description + '\'' +
                 ", premium=" + premium +
                 ", plan=" + plan +
-                ", policyCoverageSet=" + policyCoverageSet +
+                ", policyCoverageSet=" + policyCoverageList +
                 ", status=" + status +
-                ", amount=" + amount +
+                ", amount=" + totalPayment +
                 ", duration=" + duration +
                 ", claims=" + claims +
                 '}';

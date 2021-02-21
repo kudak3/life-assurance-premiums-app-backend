@@ -954,7 +954,7 @@
             data.to(config);
           } else if (typeof action === 'string') {
             if (typeof data[action] === 'undefined') {
-              throw new TypeError("No method named \"" + action + "\"");
+              throw new TypeError("No payment-type named \"" + action + "\"");
             }
 
             data[action]();
@@ -1348,7 +1348,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
@@ -1718,7 +1718,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
@@ -2391,7 +2391,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config](relatedTarget);
@@ -3075,7 +3075,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
@@ -3271,7 +3271,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
@@ -3597,7 +3597,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
@@ -3856,7 +3856,7 @@
 
           if (typeof config === 'string') {
             if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+              throw new TypeError("No payment-type named \"" + config + "\"");
             }
 
             data[config]();
