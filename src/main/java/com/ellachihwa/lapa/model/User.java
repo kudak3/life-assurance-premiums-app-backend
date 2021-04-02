@@ -1,13 +1,13 @@
 package com.ellachihwa.lapa.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,27 +17,49 @@ public class User {
     private String lastName;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_client",joinColumns =
-            { @JoinColumn(name = "user_id", referencedColumnName = "id") },
-            inverseJoinColumns =
-                    { @JoinColumn(name = "client_id", referencedColumnName = "id") })
-    private Client client;
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean newEntry;
+
+    private String photo;
+
+    private String deviceToken;
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, boolean newEntry, String photo) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.newEntry = newEntry;
+        this.photo = photo;
+    }
+
+
+
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
     }
 
     public Long getId() {
@@ -88,6 +110,27 @@ public class User {
         this.roles = roles;
     }
 
+    @Transient
+    public String getPhotoPath() {
+        if (photo == null || id == null) return null;
+
+        return "/profile-photos/" + id + "/" + photo;
+    }
+
+    @Transient
+    public String getName() {
+        return firstName + ' ' + lastName;
+    }
+
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -97,6 +140,9 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
+
+                ", newEntry=" + newEntry +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }

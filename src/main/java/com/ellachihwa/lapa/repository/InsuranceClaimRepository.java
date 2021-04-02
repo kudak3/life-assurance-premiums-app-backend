@@ -2,6 +2,15 @@ package com.ellachihwa.lapa.repository;
 
 import com.ellachihwa.lapa.model.InsuranceClaim;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface InsuranceClaimRepository extends JpaRepository<InsuranceClaim,Long> {
+    long countInsuranceClaimsByNewEntryIsTrue();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE InsuranceClaim c SET c.newEntry = false WHERE c.newEntry = true ")
+    void updateAllClaims();
 }

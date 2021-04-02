@@ -25,6 +25,7 @@ private final ClientRepository clientRepository;
     }
 
     public Client saveClient(Client client){
+
        return clientRepository.save(client);
     }
 
@@ -53,7 +54,7 @@ private final ClientRepository clientRepository;
 
     public List<PolicyCoverage> getClientCoverages(Long id){
 
-      return  coverageRepository.findPolicyCoveragesByClient_Id(id).orElse(null);
+      return  coverageRepository.findPolicyCoveragesByClient_Id(id);
             }
 
     public List<Payment> getPaymentHistory(Long id){
@@ -64,9 +65,11 @@ private final ClientRepository clientRepository;
         return clientRepository.findById(id).map(client -> client.getClaims()).orElse(null);
     }
 
-//    public List<Policy> getPolicies(){
-//        return clientRepository.findById(id).map(client -> client.getP)
-//    }
+    public Client getClientByUserId(Long id){
+        System.out.println("===========");
+        System.out.println(clientRepository.findClientByUserId(id).getPolicyCoverageList().get(0).getClient());
+     return clientRepository.findClientByUserId(id);
+    }
 
 
 }

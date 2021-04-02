@@ -1,29 +1,48 @@
 package com.ellachihwa.lapa.model;
 
+import com.ellachihwa.lapa.utils.CustomDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Date;
 
 
+
 @Entity
-public class Payment {
+public class Payment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonManagedReference
+
+    @JsonBackReference(value="payment-client")
     @ManyToOne
     private Client client;
     private String accountNumber;
+
 
     @OneToOne
     private PaymentType paymentType;
     private Long amount;
     private String description;
+
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date date;
-    
+
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean newEntry;
+
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
+    }
 
     public Long getId() {
         return id;

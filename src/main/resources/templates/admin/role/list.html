@@ -27,7 +27,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-sm-4 ">
+                <a class="btn btn-primary rounded " th:href="@{/roles/add}">New Role</a>
+            </div>
 
             <br/>
             <br/>
@@ -49,10 +51,10 @@
                 <tr th:each="role : ${roles}">
                     <td th:text="${role.id}"></td>
                     <td th:text="${role.name}"></td>
-                    <td><a th:href="@{'/roles/update/' + ${role.id}}" class="btn btn-warning">Update</a></h2>
+                    <td><a th:href="@{'/roles/update/' + ${role.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
                     </td>
                     <td><a th:href="@{'/roles/delete/' + ${role.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
 

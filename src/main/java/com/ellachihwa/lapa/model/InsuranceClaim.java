@@ -1,29 +1,50 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.ClaimStatus;
+import com.ellachihwa.lapa.utils.CustomDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
 
 @Entity
-public class InsuranceClaim {
+public class InsuranceClaim implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date date;
+
+    @JsonBackReference(value = "claim-client")
     @ManyToOne
     private Client client;
+
+    @JsonIgnore
     @ManyToOne
     private Policy policy;
     private String description;
     @Enumerated
     private ClaimStatus claimStatus;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean newEntry;
 
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
+    }
 
     public Long getId() {
         return id;

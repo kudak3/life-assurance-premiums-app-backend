@@ -20,7 +20,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Insurance Policy</a></li>
+                                <li><a href="#">Insurance Policy </a></li>
                                 <li class="active">List</li>
                             </ol>
                         </div>
@@ -67,10 +67,9 @@
                     <td th:text="${policy.duration}"></td>
                     <td th:text="${policy.coverageAmount}"></td>
 
-                    <td><a th:href="@{'/policies/update/' + ${policy.id}}" class="btn btn-warning">Update</a></h2>
-                    </td>
-                    <td><a th:href="@{'/policies/delete/' + ${policy.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
+                    <td><a th:href="@{'/policies/update/' + ${policy.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
+                   <a th:href="@{'/policies/delete/' + ${policy.id}}"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
                 </tr>

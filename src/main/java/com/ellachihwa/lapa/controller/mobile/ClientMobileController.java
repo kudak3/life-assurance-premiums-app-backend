@@ -28,6 +28,7 @@ public class ClientMobileController {
 
     @PostMapping
     public Client registerClient(@RequestBody Client client){
+
         return clientService.saveClient(client);
     }
 
@@ -38,6 +39,7 @@ public class ClientMobileController {
     }
     @GetMapping("/{id}/coverages")
     public List<PolicyCoverage> getClientPolicyCoverages(@PathVariable("id") Long id){
+        System.out.println("======coverages" + clientService.getClientCoverages(id));
         return clientService.getClientCoverages(id);
     }
 
@@ -52,10 +54,10 @@ public class ClientMobileController {
 
     }
 
-//    @GetMapping("/{id}/policies")
-//    public List<Policy> getClientPolicies(@PathVariable("id") Long id){
-//        return clientService.getPolicies(id);
-//    }
+    @GetMapping("/user/{id}")
+    public Client getClientByUser(@PathVariable("id") Long id){
+        return clientService.getClientByUserId(id);
+    }
 
 
 

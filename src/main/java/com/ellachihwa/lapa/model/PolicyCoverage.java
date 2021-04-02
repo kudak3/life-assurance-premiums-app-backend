@@ -1,35 +1,60 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.CoverageStatus;
+import com.ellachihwa.lapa.utils.CustomDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
-public class PolicyCoverage {
+public class PolicyCoverage implements Serializable {
     @EmbeddedId
     private PolicyCoverageKey id = new PolicyCoverageKey();
 
-    @JsonManagedReference
+    private String policyNumber;
+
+
+    @JsonManagedReference(value="coverage")
     @ManyToOne()
     @MapsId("clientId")
     private Client client;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "policy-cover")
     @ManyToOne()
     @MapsId("policyId")
     private Policy policy;
 
-
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date date;
+
     @Enumerated
     private CoverageStatus status;
 
+    public PolicyCoverage() {
+    }
+
+    public PolicyCoverage(Client client, Policy policy) {
+        this.client = client;
+        this.policy = policy;
+    }
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean newEntry;
+
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
+    }
 
     public Date getDate() {
         return date;
@@ -41,6 +66,14 @@ public class PolicyCoverage {
 
     public CoverageStatus getStatus() {
         return status;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
     public void setStatus(CoverageStatus status) {
@@ -75,8 +108,8 @@ public class PolicyCoverage {
     public String toString() {
         return "PolicyCoverage{" +
                 "id=" + id +
-                ", client=" + client.getFirstName() + " " + client.getLastName() +
-                ", policy=" + policy.getName() + " " + policy.getId() +
+                ", client=" + client.getFirstName() +
+                ", policy=" + policy.getName() +
                 ", date=" + date +
                 ", status=" + status +
                 '}';

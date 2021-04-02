@@ -1,21 +1,30 @@
 package com.ellachihwa.lapa.model;
 
+import com.ellachihwa.lapa.utils.CustomDateDeserializer;
 import com.ellachihwa.lapa.utils.Gender;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@JsonIgnoreProperties({ "policyCoverageList" })
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    //attributes
     private Long id;
     private String firstName;
     private String lastName;
@@ -26,24 +35,58 @@ public class Client {
 
 
     @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date dateOfBirth;
     @Enumerated
     private Gender gender;
-    @OneToOne(mappedBy = "client")
+
+
+
+
+    @OneToOne
     private User user;
 
+
+    @JsonManagedReference(value = "claim-client")
     @OneToMany(mappedBy = "client")
     private List<InsuranceClaim> claims = new ArrayList<>();
 
 
-    @JsonBackReference
+    @JsonManagedReference(value="payment-client")
     @OneToMany(mappedBy = "client")
     private List<Payment> payments = new ArrayList<>();
 
-    @JsonBackReference
+
+    @JsonBackReference(value="coverage")
     @OneToMany(mappedBy = "client")
     List<PolicyCoverage> policyCoverageList;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean newEntry ;
+
+    @Transient
+    public String getName(){
+        return firstName + ' ' + lastName;
+    }
+
+
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
+    }
 
     public Long getId() {
         return id;
@@ -108,8 +151,7 @@ public class Client {
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
-        System.out.println("-------------");
-        System.out.println(dateOfBirth);
+
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -159,7 +201,7 @@ public class Client {
                 ", gender=" + gender +
                 ", claims=" + claims +
                 ", payments=" + payments +
-                ", policyCoverageSet=" + policyCoverageList +
+                ", policyCoverageList=" + policyCoverageList +
                 '}';
     }
 }

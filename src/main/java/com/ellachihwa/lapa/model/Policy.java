@@ -3,13 +3,17 @@ package com.ellachihwa.lapa.model;
 import com.ellachihwa.lapa.utils.Plan;
 import com.ellachihwa.lapa.utils.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties({ "policyCoverageList" })
 @Entity
-public class Policy {
+public class Policy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +24,9 @@ public class Policy {
     @Enumerated
     private Plan plan;
 
-    @JsonBackReference
+
+
+    @JsonBackReference(value = "policy-cover")
     @OneToMany(mappedBy = "policy")
     List<PolicyCoverage> policyCoverageList;
 
@@ -28,6 +34,7 @@ public class Policy {
     private Status status;
     private Long totalPayment;
     private Long coverageAmount;
+    //term
     private Long duration;
 
     @OneToMany(mappedBy = "policy")

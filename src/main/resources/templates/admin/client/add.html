@@ -23,6 +23,8 @@
                             <input type="hidden" th:field="*{id}"/>
 
 
+
+
                             <div class="form-group">
                                 <label>Select Title</label>
                                 <select class="form-control" required="required" th:field="*{title}">
@@ -101,7 +103,7 @@
                                 <label>Select Gender</label>
                                 <select class="form-control" required="required" th:field="*{gender}">
                                     <option value="">----Select----</option>
-                                    <option th:each="gender : ${gender}"
+                                    <option th:each="gender : ${genderList}"
                                             th:value="${{gender}}"
                                             th:text="${gender.name}">
                                     </option>

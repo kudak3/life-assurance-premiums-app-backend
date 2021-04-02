@@ -1,7 +1,19 @@
 package com.ellachihwa.lapa.repository;
 
-import com.ellachihwa.lapa.model.Notification;
+import com.ellachihwa.lapa.model.NotificationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface NotificationRepository extends JpaRepository<Notification,Long> {
+@Repository
+public interface NotificationRepository extends JpaRepository<NotificationEntity,Long> {
+    @Transactional
+    @Modifying
+    @Query("UPDATE NotificationEntity n SET n.viewed = false WHERE n.viewed = true ")
+    void updateAllPayments();
+
+
+    long countNotificationsByViewedIsFalse();
 }

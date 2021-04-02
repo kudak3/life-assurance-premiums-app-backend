@@ -1,6 +1,8 @@
 package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
+import com.ellachihwa.lapa.repository.ClientRepository;
+import com.ellachihwa.lapa.service.UserService;
 import com.ellachihwa.lapa.utils.Gender;
 import com.ellachihwa.lapa.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,15 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("list")
     public String listClients(Model model) {
+        clientRepository.updateAllClients();
         model.addAttribute("clients", clientService.getClients());
         return "admin/client/list";
     }
@@ -26,7 +35,8 @@ public class ClientController {
 
         Client client = new Client();
         model.addAttribute("client", client);
-        model.addAttribute("gender", Gender.values());
+        model.addAttribute("genderList", Gender.values());
+        model.addAttribute("users",userService.getUsers());
 
 
 
@@ -43,16 +53,16 @@ public class ClientController {
     }
 
     @PostMapping("save")
-    public String saveEmployee(@ModelAttribute("client") Client client) {
-        // save employee to database
+    public String saveUser(@ModelAttribute("client") Client client) {
+        // save user to database
         clientService.saveClient(client);
         return "redirect:/clients/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEm(@PathVariable(value = "id") long id) {
+    public String deleteClient(@PathVariable(value = "id") long id) {
 
-        // call delete employee payment-type
+        // call delete client payment-type
         clientService.deleteClient(id);
         return "redirect:/clients/list";
     }

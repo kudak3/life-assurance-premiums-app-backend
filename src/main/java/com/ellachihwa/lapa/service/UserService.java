@@ -8,6 +8,7 @@ import com.ellachihwa.lapa.repository.RoleRepository;
 import com.ellachihwa.lapa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,14 +44,16 @@ public class UserService implements UserDetailsService {
 
 
         if(userRepository.findByEmail(userDto.getEmail()) != null){
-            System.out.println("here");
+
             return null;
         }else {
-            System.out.println("there");
+
             Role role = roleRepository.getOne(userDto.getRole());
             User user = new User(userDto.getFirstName(),
                     userDto.getLastName(), userDto.getEmail(),
-                    passwordEncoder.encode(userDto.getPassword()), Arrays.asList(role));
+                    passwordEncoder.encode(userDto.getPassword()), Arrays.asList(role),true,userDto.getPhoto());
+
+
             return userRepository.save(user);
         }
 
@@ -83,6 +86,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getUsers(){
+        System.out.println(userRepository.findAll());
         return userRepository.findAll();
     }
 
@@ -100,5 +104,22 @@ public class UserService implements UserDetailsService {
 
     }
 
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public User loginUser(String username,String password){
+        User user = userRepository.findByEmail(username);
+        if(user != null) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+
+                return user;
+            }
+            else
+                return null;
+        }
+        return null;
+
+    }
 
 }

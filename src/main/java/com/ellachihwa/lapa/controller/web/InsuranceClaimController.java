@@ -3,6 +3,7 @@ package com.ellachihwa.lapa.controller.web;
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.InsuranceClaim;
 import com.ellachihwa.lapa.model.Policy;
+import com.ellachihwa.lapa.repository.InsuranceClaimRepository;
 import com.ellachihwa.lapa.repository.PolicyRepository;
 import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.InsuranceClaimService;
@@ -30,9 +31,15 @@ public class InsuranceClaimController {
     @Autowired
     private PolicyService policyService;
 
+    @Autowired
+    private InsuranceClaimRepository claimRepository;
+
+
+
 
     @GetMapping("list")
     public String getAllClaims(Model model){
+       claimRepository.updateAllClaims();
         model.addAttribute("claims",claimService.getClaims());
         return "/admin/claim/list";
     }
@@ -65,6 +72,22 @@ public class InsuranceClaimController {
         model.addAttribute("statuses", ClaimStatus.values());
 
         return "admin/claim/add";
+    }
+
+    @GetMapping("approve/{id}")
+    public String approve(@PathVariable(value = "id") long id) {
+
+        // call approve method
+        claimService.approveClaim(id);
+        return "redirect:/claims/list";
+    }
+
+    @PutMapping("decline/{id}")
+    public String decline(@PathVariable(value = "id") long id) {
+
+        // call approve method
+        claimService.declineClaim(id);
+        return "redirect:/claims/list";
     }
 
 }

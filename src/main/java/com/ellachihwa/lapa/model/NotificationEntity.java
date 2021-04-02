@@ -4,10 +4,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-public class Notification {
+@Table(name = "notification")
+public class NotificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,8 @@ public class Notification {
 
     private String affectedTable;
 
-    private boolean read;
+    @Column(columnDefinition = "boolean default false")
+    private boolean viewed;
 
     public Long getId() {
         return id;
@@ -51,11 +52,11 @@ public class Notification {
         this.affectedTable = affectedTable;
     }
 
-    public boolean isRead() {
-        return read;
+    public boolean isViewed() {
+        return viewed;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setViewed(boolean viewed) {
+        this.viewed = viewed;
     }
 }

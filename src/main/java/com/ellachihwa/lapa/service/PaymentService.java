@@ -7,6 +7,7 @@ import com.ellachihwa.lapa.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +28,8 @@ PaymentRepository paymentRepository;
 
     public Payment savePayment(Payment payment){
 
+        payment.setNewEntry(true);
+        payment.setDate(new Date());
         return paymentRepository.save(payment);
     }
 

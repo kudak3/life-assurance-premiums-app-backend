@@ -33,9 +33,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Select Status</label>
+                                <label>Select Payment Method</label>
                                 <select class="form-control" required="required" th:field="*{paymentType}">
-                                    <option value="">----Select----</option>
+                                    <option value="">----Select Payment Method----</option>
                                     <option th:each="type : ${paymentType}"
                                             th:value="${{type}}"
                                             th:text="${type.name}">
@@ -44,34 +44,25 @@
                             </div>
 
                             <div class="form-group"><label for="accountNumber" class=" form-control-label">
-                                Code</label><input type="text" id="accountNumber" name="accountNumber" th:field="*{accountNumber}"
+                                Account Number</label><input type="text" id="accountNumber" name="accountNumber" th:field="*{accountNumber}"
                                                required=""    placeholder="Account Number" class="form-control">
                                 <div th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"></div>
                             </div>
 
                             <div class="form-group"><label for="description" class=" form-control-label">
-                                Code</label><input type="text" id="description" name="description" th:field="*{description}"
+                                Payment Description</label><input type="text" id="description" name="description" th:field="*{description}"
                                                    required=""    placeholder="Payment Description" class="form-control">
                                 <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
                             </div>
 
 
                             <div class="form-group"><label for="amount" class=" form-control-label">
-                                Code</label><input type="text" id="amount" name="amount" th:field="*{amount}"
+                                Amount</label><input type="number" id="amount" name="amount" th:field="*{amount}"
                                                    required=""    placeholder="Enter amount paid" class="form-control">
                                 <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
                             </div>
 
 
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('date')}? 'has-error':''">
-                                <label for="date" class="control-label">Enter date of Payment:
-                                </label> <input id="date" class="form-control"
-                                                required=""            type="date" th:field="*{date}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('date')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
 
 
                             <div class="card-footer">

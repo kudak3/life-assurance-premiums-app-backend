@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en" th:fragment="count(count)">
 <head>
+    <title>Home Page</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="description" content="Lapa backend">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -42,7 +43,7 @@
 <body>
 
 
-<aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel" >
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
@@ -63,7 +64,7 @@
 
                 <li class="active">
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/noitifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i class="badge bg-danger rounded-circle"><span class="text-center text-capitalize text-white">44</span></i></a>
+                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i class="badge bg-danger rounded-circle"><span class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
                 </li>
 
 

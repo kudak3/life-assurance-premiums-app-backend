@@ -2,6 +2,7 @@ package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.Payment;
+import com.ellachihwa.lapa.repository.PaymentRepository;
 import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.PaymentTypeService;
 import com.ellachihwa.lapa.service.PaymentService;
@@ -29,8 +30,12 @@ public class PaymentController {
     @Autowired
     private PaymentTypeService paymentTypeService;
 
+    @Autowired
+    private PaymentRepository paymentRepository;
+
     @GetMapping("/list")
     public String getPayments(Model model){
+        paymentRepository.updateAllPayments();
         model.addAttribute("payments", paymentService.getPayments());
         return "admin/payment/list";
     }
@@ -62,6 +67,6 @@ public class PaymentController {
 
         // call delete payment methods
         paymentService.deletePayment(id);
-        return "redirect:/";
+        return "redirect:/payments/list";
     }
 }

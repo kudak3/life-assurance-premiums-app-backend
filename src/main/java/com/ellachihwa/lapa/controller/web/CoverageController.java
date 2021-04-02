@@ -1,9 +1,11 @@
 package com.ellachihwa.lapa.controller.web;
 
+import com.ellachihwa.lapa.dto.CoverDto;
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.Policy;
 import com.ellachihwa.lapa.model.PolicyCoverage;
 import com.ellachihwa.lapa.model.PolicyCoverageKey;
+import com.ellachihwa.lapa.repository.CoverageRepository;
 import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.CoverageService;
 import com.ellachihwa.lapa.service.PolicyService;
@@ -30,10 +32,14 @@ public class CoverageController {
     private ClientService clientService;
 
     @Autowired
+    private CoverageRepository coverageRepository;
+
+    @Autowired
     private PolicyService policyService;
 
     @GetMapping("/list")
     public String getCoverageList(Model model){
+        coverageRepository.updateAllCovers();
         model.addAttribute("coverages", coverageService.getCoverageList());
         return "admin/coverage/list";
     }
@@ -46,7 +52,7 @@ public class CoverageController {
         List<Policy> policies = policyService.getPolicies();
 
 
-        PolicyCoverage coverage = new PolicyCoverage();
+        CoverDto coverage = new CoverDto();
         model.addAttribute("coverage", coverage);
         model.addAttribute("coverageStatuses", CoverageStatus.values());
         model.addAttribute("clientList",clientList);
@@ -58,9 +64,9 @@ public class CoverageController {
 
 
     @PostMapping("save")
-    public String saveCoverage(@ModelAttribute("coverage") PolicyCoverage coverage) {
+    public String saveCoverage(@ModelAttribute("coverage") CoverDto coverDto) {
         // save payment to database
-        coverageService.saveCoverage(coverage);
+        coverageService.saveCoverage(coverDto);
         return "redirect:/coverages/list";
     }
 

@@ -28,7 +28,9 @@
                 </div>
             </div>
 
-            <a class="btn btn-primary " th:href="@{/payments/add}">New Payment</a>
+            <div class="col-sm-4 ">
+                <a class="btn btn-primary rounded " th:href="@{/payments/add}">New Payment</a>
+            </div>
 
             <br/>
             <br/>
@@ -60,10 +62,10 @@
                     <td th:text="${payment.date}">
                            </td>
 
-                    <td><a th:href="@{'/payments/update/' + ${payment.id}}" class="btn btn-warning">Update</a></h2>
+                    <td><a th:href="@{'/payments/update/' + ${payment.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
 
                         <a th:href="@{'/payments/delete/' + ${payment.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger">Delete</a></h2>
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
                 </tr>
