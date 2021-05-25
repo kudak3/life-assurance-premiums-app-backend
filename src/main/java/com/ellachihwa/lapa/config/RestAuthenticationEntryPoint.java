@@ -1,5 +1,7 @@
 package com.ellachihwa.lapa.config;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -19,7 +21,7 @@ public final class RestAuthenticationEntryPoint
     @Override
     public void commence
             (HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx)
-            throws IOException{
+            throws IOException {
         response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         PrintWriter writer = response.getWriter();
@@ -33,7 +35,7 @@ public final class RestAuthenticationEntryPoint
     }
 
     @Override
-    public void afterPropertiesSet(){
+    public void afterPropertiesSet() {
         setRealmName("ApTest-APP");
         super.afterPropertiesSet();
     }

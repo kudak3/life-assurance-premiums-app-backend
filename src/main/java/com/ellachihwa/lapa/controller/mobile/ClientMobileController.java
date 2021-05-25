@@ -50,6 +50,8 @@ public class ClientMobileController {
 
     @GetMapping("/{id}/claims")
     public List<InsuranceClaim> getClientClaims(@PathVariable("id") Long id){
+        System.out.println("==============");
+        System.out.println(clientService.getClaims(id));
         return clientService.getClaims(id);
 
     }
