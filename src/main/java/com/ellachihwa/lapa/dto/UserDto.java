@@ -11,12 +11,13 @@ public class UserDto {
     private String confirmPassword;
     private Long role;
     private String photo;
+    private String deviceToken;
 
     public UserDto(){
 
     }
 
-    public UserDto(String firstName, String lastName, String email, String password,Long role,String photo) {
+    public UserDto(String firstName, String lastName, String email, String password,Long role,String photo,String deviceToken) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,6 +25,15 @@ public class UserDto {
         this.password = password;
         this.role = role;
         this.photo = photo;
+        this.deviceToken = deviceToken;
+    }
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
     }
 
     public String getPhoto() {

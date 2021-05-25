@@ -6,6 +6,11 @@ import java.util.List;
 
 public class SubscriptionRequestDto {
 
+    public SubscriptionRequestDto(String topicName, List<String> tokens) {
+        this.topicName = topicName;
+        this.tokens = tokens;
+    }
+
     String topicName;
     List<String> tokens;
 

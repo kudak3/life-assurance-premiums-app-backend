@@ -7,6 +7,15 @@ public class NotificationDto {
     private String title;
     private String body;
 
+    public NotificationDto() {
+    }
+
+    public NotificationDto(String target, String title, String body) {
+        this.target = target;
+        this.title = title;
+        this.body = body;
+    }
+
     public String getTarget() {
         return target;
     }
