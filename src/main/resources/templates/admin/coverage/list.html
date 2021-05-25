@@ -56,15 +56,15 @@
                     <td th:text="${cover.policyNumber}">
                     </td>
                     <td th:text="${cover.client.firstName + ' ' + cover.client.lastName + ' ' + cover.client.idNumber}"></td>
-                  <td th:text="${cover.policy.name + ' ' + cover.policy.id}">
+                  <td th:text="${cover.policy.name}">
                   </td>
 
                     <td th:text="${cover.date}">
                     </td>
 
-                    <td><a th:href="@{'/admin/level/update/' + ${cover.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
+                    <td><a th:href="@{'/coverages/update/' + ${cover.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
 
-                    <a th:href="@{'/admin/level/delete/' + ${cover.id}}"
+                    <a th:href="@{'/coverages/delete/' + ${cover.id.clientId} + '/' + ${cover.id.policyId}}"
                            onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                     </td>
 

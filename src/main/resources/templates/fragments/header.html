@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en" th:fragment="count(count)">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en" th:fragment="showCount (count)">
 <head>
     <title>Home Page</title>
     <meta charset="utf-8">
@@ -64,7 +64,7 @@
 
                 <li class="active">
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i class="badge bg-danger rounded-circle"><span class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
+                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i th:if="${count}" class="badge bg-danger rounded-circle"><span class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
                 </li>
 
 

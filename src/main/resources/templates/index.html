@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<th:block th:include="fragments/header :: count(count=notifications)"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications})"></th:block>
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header  float-left" >

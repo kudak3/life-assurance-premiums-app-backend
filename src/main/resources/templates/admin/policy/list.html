@@ -43,7 +43,6 @@
                 <thead>
                 <tr>
 
-                    <th> Policy Number</th>
                     <th>Policy Name</th>
                     <th>Description</th>
                     <th>Plan Type</th>
@@ -58,14 +57,13 @@
 
                 <tbody>
                 <tr th:each="policy : ${policies}">
-                    <td th:text="${policy.id}"></td>
                     <td th:text="${policy.name}"></td>
                     <td th:text="${policy.description}"></td>
                     <td th:text="${policy.plan}"></td>
-                    <td th:text="${policy.premium}"></td>
-                    <td th:text="${policy.totalPayment}"></td>
+                    <td th:text="${'$' + policy.premium}"></td>
+                    <td th:text="${'$' + policy.totalPayment}"></td>
                     <td th:text="${policy.duration}"></td>
-                    <td th:text="${policy.coverageAmount}"></td>
+                    <td th:text="${'$' + policy.coverageAmount}"></td>
 
                     <td><a th:href="@{'/policies/update/' + ${policy.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
                    <a th:href="@{'/policies/delete/' + ${policy.id}}"
