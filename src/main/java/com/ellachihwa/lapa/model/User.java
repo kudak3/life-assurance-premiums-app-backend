@@ -16,6 +16,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
+    private String token;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -27,15 +28,7 @@ public class User implements Serializable {
 
     private String photo;
 
-    private String deviceToken;
 
-    public String getDeviceToken() {
-        return deviceToken;
-    }
-
-    public void setDeviceToken(String deviceToken) {
-        this.deviceToken = deviceToken;
-    }
 
     public User() {
 

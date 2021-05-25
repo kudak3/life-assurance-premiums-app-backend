@@ -16,6 +16,7 @@ import java.util.Date;
 
 @Entity
 public class InsuranceClaim implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,19 +25,26 @@ public class InsuranceClaim implements Serializable {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date date;
 
-    @JsonBackReference(value = "claim-client")
-    @ManyToOne
-    private Client client;
 
-    @JsonIgnore
-    @ManyToOne
-    private Policy policy;
+    @OneToOne
+    private PolicyCoverage policyCoverage;
+
     private String description;
+    private Long amount;
     @Enumerated
     private ClaimStatus claimStatus;
 
     @Column(columnDefinition = "boolean default true")
     private boolean newEntry;
+
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
 
     public boolean isNewEntry() {
         return newEntry;
@@ -62,15 +70,6 @@ public class InsuranceClaim implements Serializable {
         this.date = date;
     }
 
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -87,12 +86,12 @@ public class InsuranceClaim implements Serializable {
         this.claimStatus = claimStatus;
     }
 
-    public Policy getPolicy() {
-        return policy;
+    public PolicyCoverage getPolicyCoverage() {
+        return policyCoverage;
     }
 
-    public void setPolicy(Policy policy) {
-        this.policy = policy;
+    public void setPolicyCoverage(PolicyCoverage policyCoverage) {
+        this.policyCoverage = policyCoverage;
     }
 
     @Override
@@ -100,10 +99,11 @@ public class InsuranceClaim implements Serializable {
         return "InsuranceClaim{" +
                 "id=" + id +
                 ", date=" + date +
-                ", client=" + client.getFirstName() + " " + client.getLastName() +
-                ", policy=" + policy.getName() + " " + policy.getId() +
+                ", policyCoverage=" + policyCoverage +
                 ", description='" + description + '\'' +
+                ", amount=" + amount +
                 ", claimStatus=" + claimStatus +
+                ", newEntry=" + newEntry +
                 '}';
     }
 }

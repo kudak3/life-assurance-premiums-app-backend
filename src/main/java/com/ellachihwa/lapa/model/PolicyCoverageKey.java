@@ -12,6 +12,14 @@ public class PolicyCoverageKey implements Serializable {
 
     private Long policyId;
 
+    public PolicyCoverageKey() {
+    }
+
+    public PolicyCoverageKey(Long clientId, Long policyId) {
+        this.clientId = clientId;
+        this.policyId = policyId;
+    }
+
     public Long getClientId() {
         return clientId;
     }

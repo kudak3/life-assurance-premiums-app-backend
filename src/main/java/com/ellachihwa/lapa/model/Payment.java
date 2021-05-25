@@ -21,6 +21,7 @@ public class Payment implements Serializable {
     @ManyToOne
     private Client client;
     private String accountNumber;
+    private String policyNumber;
 
 
     @OneToOne
@@ -98,6 +99,14 @@ public class Payment implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
     @Override

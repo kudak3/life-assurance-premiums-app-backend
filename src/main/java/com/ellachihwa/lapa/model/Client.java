@@ -1,12 +1,11 @@
 package com.ellachihwa.lapa.model;
 
 import com.ellachihwa.lapa.utils.CustomDateDeserializer;
+import com.ellachihwa.lapa.utils.CustomDateSerializer;
 import com.ellachihwa.lapa.utils.Gender;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@JsonIgnoreProperties({ "policyCoverageList" })
+@JsonIgnoreProperties({"claims", "policyCoverageList"})
 @Entity
 @Table(name = "client")
 public class Client implements Serializable {
@@ -32,6 +31,7 @@ public class Client implements Serializable {
     private String phoneNumber;
     private String email;
     private String idNumber;
+    private String deviceToken;
 
 
     @Temporal(TemporalType.DATE)
@@ -41,35 +41,27 @@ public class Client implements Serializable {
     private Gender gender;
 
 
-
-
     @OneToOne
     private User user;
 
 
-    @JsonManagedReference(value = "claim-client")
-    @OneToMany(mappedBy = "client")
-    private List<InsuranceClaim> claims = new ArrayList<>();
 
-
-    @JsonManagedReference(value="payment-client")
+    @JsonBackReference(value = "payment-client")
     @OneToMany(mappedBy = "client")
     private List<Payment> payments = new ArrayList<>();
 
 
-    @JsonBackReference(value="coverage")
+    @JsonBackReference(value = "coverage")
     @OneToMany(mappedBy = "client")
-    List<PolicyCoverage> policyCoverageList;
+    private List<PolicyCoverage> policyCoverageList;
 
     @Column(columnDefinition = "boolean default false")
-    private boolean newEntry ;
+    private boolean newEntry;
 
     @Transient
-    public String getName(){
+    public String getName() {
         return firstName + ' ' + lastName;
     }
-
-
 
 
     public User getUser() {
@@ -150,6 +142,7 @@ public class Client implements Serializable {
         return dateOfBirth;
     }
 
+
     public void setDateOfBirth(Date dateOfBirth) {
 
         this.dateOfBirth = dateOfBirth;
@@ -163,13 +156,6 @@ public class Client implements Serializable {
         this.gender = gender;
     }
 
-    public List<InsuranceClaim> getClaims() {
-        return claims;
-    }
-
-    public void setClaims(List<InsuranceClaim> claims) {
-        this.claims = claims;
-    }
 
     public List<Payment> getPayments() {
         return payments;
@@ -187,6 +173,14 @@ public class Client implements Serializable {
         this.policyCoverageList = policyCoverageSet;
     }
 
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -199,7 +193,6 @@ public class Client implements Serializable {
                 ", idNumber='" + idNumber + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender=" + gender +
-                ", claims=" + claims +
                 ", payments=" + payments +
                 ", policyCoverageList=" + policyCoverageList +
                 '}';

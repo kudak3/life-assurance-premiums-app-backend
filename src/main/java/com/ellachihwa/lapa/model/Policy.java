@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreProperties({ "policyCoverageList" })
+@JsonIgnoreProperties({"policyCoverageList", "claims"})
 @Entity
 public class Policy implements Serializable {
     @Id
@@ -25,7 +25,6 @@ public class Policy implements Serializable {
     private Plan plan;
 
 
-
     @JsonBackReference(value = "policy-cover")
     @OneToMany(mappedBy = "policy")
     List<PolicyCoverage> policyCoverageList;
@@ -36,9 +35,6 @@ public class Policy implements Serializable {
     private Long coverageAmount;
     //term
     private Long duration;
-
-    @OneToMany(mappedBy = "policy")
-    private List<InsuranceClaim> claims = new ArrayList<>();
 
 
     public Long getPremium() {
@@ -121,13 +117,6 @@ public class Policy implements Serializable {
         this.coverageAmount = coverageAmount;
     }
 
-    public List<InsuranceClaim> getClaims() {
-        return claims;
-    }
-
-    public void setClaims(List<InsuranceClaim> claims) {
-        this.claims = claims;
-    }
 
     @Override
     public String toString() {
@@ -141,7 +130,6 @@ public class Policy implements Serializable {
                 ", status=" + status +
                 ", amount=" + totalPayment +
                 ", duration=" + duration +
-                ", claims=" + claims +
                 '}';
     }
 }

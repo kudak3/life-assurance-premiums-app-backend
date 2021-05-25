@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -29,6 +30,8 @@ public class PolicyCoverage implements Serializable {
     @ManyToOne()
     @MapsId("policyId")
     private Policy policy;
+
+
 
     @Temporal(TemporalType.DATE)
     @JsonDeserialize(using = CustomDateDeserializer.class)

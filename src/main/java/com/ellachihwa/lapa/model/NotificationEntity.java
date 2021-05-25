@@ -1,5 +1,7 @@
 package com.ellachihwa.lapa.model;
 
+import com.ellachihwa.lapa.utils.CustomDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,13 +14,38 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String message;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date created;
 
     private String affectedTable;
 
     @Column(columnDefinition = "boolean default false")
     private boolean viewed;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean web;
+
+    public NotificationEntity() {
+
+    }
+
+    public boolean isWeb() {
+        return web;
+    }
+
+    public void setWeb(boolean web) {
+        this.web = web;
+    }
+
+    public NotificationEntity(String message, Date created, String affectedTable, boolean viewed, boolean web) {
+        this.message = message;
+        this.created = created;
+        this.affectedTable = affectedTable;
+        this.viewed = viewed;
+        this.web = web;
+    }
 
     public Long getId() {
         return id;
