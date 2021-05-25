@@ -1,7 +1,9 @@
 package com.ellachihwa.lapa.controller.mobile;
 
 import com.ellachihwa.lapa.dto.UserDto;
+import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.User;
+import com.ellachihwa.lapa.service.ClientService;
 import com.ellachihwa.lapa.service.UserService;
 import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class UserMobileController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ClientService clientService;
 
     @GetMapping
     public List<User> getUsers(){
@@ -48,16 +53,21 @@ public class UserMobileController {
 
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestParam("username") String userName, @RequestParam("password") String password) {
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestParam("username") String userName, @RequestParam("password") String password, @RequestParam("token") String token) {
+
 
         User user = userService.loginUser(userName,password);
         if (user != null) {
-
+            Client client = clientService.getClientByUserId(user.getId());
+            client.setDeviceToken(token);
+            clientService.updateClient(client);
                 return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        else
+        else {
+            userService.updateUSer(user);
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        }
     }
 
 

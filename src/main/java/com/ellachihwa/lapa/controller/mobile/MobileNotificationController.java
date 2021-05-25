@@ -18,8 +18,8 @@ public class MobileNotificationController {
     private NotificationService notificationService;
 
     @PostMapping("/subscribe")
-    public void subscribeToTopic(@RequestBody SubscriptionRequestDto subscriptionRequestDto) {
-        notificationService.subscribeToTopic(subscriptionRequestDto);
+    public void subscribeToTopic(@RequestBody String token) {
+        notificationService.subscribeToTopic(token);
     }
 
     @PostMapping("/unsubscribe")
