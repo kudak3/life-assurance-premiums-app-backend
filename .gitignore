@@ -4,9 +4,6 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-!**/src/main/resources/fcm/
-src/main/resources/fcm/
-src/main/resources/fcm/life-assurance-mobile-app-firebase-adminsdk-hk6s7-ed48883fea.json
 
 ### STS ###
 .apt_generated
@@ -38,3 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
+life-assurance-mobile-app-firebase-adminsdk-hk6s7-ed48883fea.json
+
