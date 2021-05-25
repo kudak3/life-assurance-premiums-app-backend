@@ -38,14 +38,14 @@ public class CoverageController {
     private PolicyService policyService;
 
     @GetMapping("/list")
-    public String getCoverageList(Model model){
+    public String getCoverageList(Model model) {
         coverageRepository.updateAllCovers();
         model.addAttribute("coverages", coverageService.getCoverageList());
         return "admin/coverage/list";
     }
 
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public String addPage(Model model) {
 
         List<Client> clientList = clientService.getClients();
@@ -55,27 +55,28 @@ public class CoverageController {
         CoverDto coverage = new CoverDto();
         model.addAttribute("coverage", coverage);
         model.addAttribute("coverageStatuses", CoverageStatus.values());
-        model.addAttribute("clientList",clientList);
-        model.addAttribute("policies",policies);
+        model.addAttribute("clientList", clientList);
+        model.addAttribute("policies", policies);
 
         return "admin/coverage/add";
     }
 
 
-
-    @PostMapping("save")
+    @PostMapping("/save")
     public String saveCoverage(@ModelAttribute("coverage") CoverDto coverDto) {
         // save payment to database
         coverageService.saveCoverage(coverDto);
         return "redirect:/coverages/list";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteCoverage(@PathVariable(value = "id") PolicyCoverageKey id) {
+    @GetMapping("/delete/{clientId}/{policyId}")
+    public String deleteCoverage(@PathVariable(value = "clientId") Long clientId, @PathVariable(value = "policyId") Long policyId) {
+
+        PolicyCoverageKey id = new PolicyCoverageKey(clientId, policyId);
 
         // call delete coverage methods
         coverageService.deleteCoverage(id);
-        return "redirect:/";
+        return "redirect:/coverages/list";
     }
 
 

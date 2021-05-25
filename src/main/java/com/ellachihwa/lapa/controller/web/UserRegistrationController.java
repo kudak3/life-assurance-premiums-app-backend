@@ -66,6 +66,8 @@ public class UserRegistrationController {
 
         String  photoName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         userDto.setPhoto(photoName);
+        System.out.println("===================userDto");
+        System.out.println(userDto);
 
         User user = userService.save(userDto);
         if(user == null)
@@ -117,9 +119,9 @@ public class UserRegistrationController {
             return "redirect:/users/add?error";
         // save user to database
 
+
         String  photoName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             userDto.setPhoto(photoName);
-
         User user = userService.save(userDto);
        if(user == null)
            return "redirect:/users/add?email";
@@ -129,6 +131,7 @@ public class UserRegistrationController {
        if(!Files.exists(uploadPath)){
            Files.createDirectories(uploadPath);
        }
+
 
        try (InputStream inputStream = multipartFile.getInputStream()){
            Path filePath = uploadPath.resolve(photoName);

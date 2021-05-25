@@ -2,8 +2,10 @@ package com.ellachihwa.lapa.controller.web;
 
 import com.ellachihwa.lapa.model.Client;
 import com.ellachihwa.lapa.model.Payment;
+import com.ellachihwa.lapa.model.PolicyCoverage;
 import com.ellachihwa.lapa.repository.PaymentRepository;
 import com.ellachihwa.lapa.service.ClientService;
+import com.ellachihwa.lapa.service.CoverageService;
 import com.ellachihwa.lapa.service.PaymentTypeService;
 import com.ellachihwa.lapa.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class PaymentController {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private CoverageService coverageService;
+
     @GetMapping("/list")
     public String getPayments(Model model){
         paymentRepository.updateAllPayments();
@@ -48,6 +53,8 @@ public class PaymentController {
 
 
         Payment payment = new Payment();
+        List<PolicyCoverage> policyCovers = coverageService.getCoverageList();
+        model.addAttribute("policyCovers",policyCovers);
         model.addAttribute("payment", payment);
         model.addAttribute("paymentType", paymentTypeService.getPaymentTypes());
         model.addAttribute("clients",clients);

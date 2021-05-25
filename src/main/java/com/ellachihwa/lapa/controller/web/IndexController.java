@@ -52,7 +52,7 @@ public class IndexController {
         model.addAttribute("newPayments",paymentRepository.countPaymentsByNewEntryTrue());
 
         model.addAttribute("policies",policyRepository.count());
-        model.addAttribute("notifications",notificationRepository.count());
+        model.addAttribute("notifications",notificationRepository.countNotificationsByViewedIsFalse());
 
 
         return "index";

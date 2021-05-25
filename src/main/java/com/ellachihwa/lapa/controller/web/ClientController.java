@@ -54,6 +54,7 @@ public class ClientController {
 
     @PostMapping("save")
     public String saveUser(@ModelAttribute("client") Client client) {
+        System.out.println("========client");
         // save user to database
         clientService.saveClient(client);
         return "redirect:/clients/list";
