@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface NotificationRepository extends JpaRepository<NotificationEntity,Long> {
     @Transactional
     @Modifying
-    @Query("UPDATE NotificationEntity n SET n.viewed = false WHERE n.viewed = true ")
-    void updateAllPayments();
+    @Query("UPDATE NotificationEntity n SET n.viewed = true WHERE n.viewed = false ")
+    void updateAllNotifications();
 
 
     long countNotificationsByViewedIsFalse();

@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface CoverageRepository extends JpaRepository<PolicyCoverage, PolicyCoverageKey> {
     List<PolicyCoverage> findPolicyCoveragesByClient_Id(Long id);
+    PolicyCoverage findPolicyCoverageByPolicyNumber(String policyNumber);
     long countPolicyCoveragesByNewEntryIsTrue();
 
     @Transactional
