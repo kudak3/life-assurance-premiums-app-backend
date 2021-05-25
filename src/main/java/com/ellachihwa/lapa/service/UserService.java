@@ -2,12 +2,15 @@ package com.ellachihwa.lapa.service;
 
 import com.ellachihwa.lapa.dto.UserDto;
 import com.ellachihwa.lapa.model.Client;
+import com.ellachihwa.lapa.model.NotificationEntity;
 import com.ellachihwa.lapa.model.Role;
 import com.ellachihwa.lapa.model.User;
+import com.ellachihwa.lapa.repository.NotificationRepository;
 import com.ellachihwa.lapa.repository.RoleRepository;
 import com.ellachihwa.lapa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Arrays;
@@ -34,6 +38,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     public UserService(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
@@ -41,8 +48,7 @@ public class UserService implements UserDetailsService {
 
 
     public User save(UserDto userDto) {
-
-
+        NotificationEntity notificationEntity = new NotificationEntity("New user created",new Date(),"user",false,true);
         if(userRepository.findByEmail(userDto.getEmail()) != null){
 
             return null;
@@ -54,6 +60,7 @@ public class UserService implements UserDetailsService {
                     passwordEncoder.encode(userDto.getPassword()), Arrays.asList(role),true,userDto.getPhoto());
 
 
+            notificationRepository.save(notificationEntity);
             return userRepository.save(user);
         }
 
@@ -86,11 +93,12 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getUsers(){
-        System.out.println(userRepository.findAll());
+        System.out.println(userRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
         return userRepository.findAll();
     }
 
     public User updateUSer(User updatedUser){
+        NotificationEntity notificationEntity = new NotificationEntity("User" + updatedUser.getFirstName() + " " + updatedUser.getLastName() + "updated",new Date(),"user",false,true);
 
         return userRepository.findById(updatedUser.getId())
                 .map(user -> {
@@ -98,6 +106,7 @@ public class UserService implements UserDetailsService {
                     user.setLastName(updatedUser.getLastName());
                     user.setEmail(updatedUser.getEmail());
                     user.setPassword(updatedUser.getPassword());
+                    notificationRepository.save(notificationEntity);
                     return userRepository.save(user);
                 })
                 .orElseGet(() -> null);
@@ -105,6 +114,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void deleteUser(Long id){
+        NotificationEntity notificationEntity = new NotificationEntity("User:" + id + "deleted",new Date(),"user",false,true);
+        notificationRepository.save(notificationEntity);
         userRepository.deleteById(id);
     }
 

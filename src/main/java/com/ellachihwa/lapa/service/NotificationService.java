@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 @Service
@@ -42,7 +43,8 @@ public class NotificationService {
         }
     }
 
-    public void subscribeToTopic(SubscriptionRequestDto subscriptionRequestDto) {
+    public void subscribeToTopic(String token) {
+        SubscriptionRequestDto subscriptionRequestDto = new SubscriptionRequestDto("all-devices", Arrays.asList(token));
         try {
             FirebaseMessaging.getInstance(firebaseApp).subscribeToTopic(subscriptionRequestDto.getTokens(),
                     subscriptionRequestDto.getTopicName());
